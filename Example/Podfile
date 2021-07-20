@@ -3,5 +3,5 @@ target 'WCAG-Colors_Tests' do
   pod 'WCAG-Colors', :path => '../'
   
   pod 'Quick', '~> 2.2.0'
-    pod 'Nimble', '~> 8.0.7'
+  pod 'Nimble', '~> 8.0.7'
 end

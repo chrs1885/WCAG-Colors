@@ -8,18 +8,36 @@
 
 /* Begin PBXBuildFile section */
 		13DCA42828EB3747F33166FC /* Pods_WCAG_Colors_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A85F3CDA6F1B65ABC94D92 /* Pods_WCAG_Colors_Tests.framework */; };
-		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		83586A13268293E8005FB59D /* NSFontFontPropsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83586A09268293E7005FB59D /* NSFontFontPropsTests.swift */; };
+		83586A14268293E8005FB59D /* ImageAverageColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83586A0A268293E7005FB59D /* ImageAverageColorTests.swift */; };
+		83586A15268293E8005FB59D /* ConformanceLevelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83586A0B268293E7005FB59D /* ConformanceLevelTests.swift */; };
+		83586A16268293E8005FB59D /* UIFontFontPropsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83586A0C268293E7005FB59D /* UIFontFontPropsTests.swift */; };
+		83586A17268293E8005FB59D /* ColorWcagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83586A0D268293E7005FB59D /* ColorWcagTests.swift */; };
+		83586A18268293E8005FB59D /* RGBAColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83586A0E268293E7005FB59D /* RGBAColorTests.swift */; };
+		83586A19268293E8005FB59D /* FontPropsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83586A0F268293E7005FB59D /* FontPropsTests.swift */; };
+		83586A1A268293E8005FB59D /* Image+mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83586A11268293E8005FB59D /* Image+mock.swift */; };
+		83586A1B268293E8005FB59D /* ImageAreaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83586A12268293E8005FB59D /* ImageAreaTests.swift */; };
+		83586A20268293FB005FB59D /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83586A1F268293FB005FB59D /* LoggerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3939E1073E906CD9CF7C7B74 /* Pods-WCAG-Colors_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WCAG-Colors_Tests.debug.xcconfig"; path = "Target Support Files/Pods-WCAG-Colors_Tests/Pods-WCAG-Colors_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		43A85F3CDA6F1B65ABC94D92 /* Pods_WCAG_Colors_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WCAG_Colors_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		474CE47AE30BA1B12B1B7FDD /* WCAG-Colors.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = "WCAG-Colors.podspec"; path = "../WCAG-Colors.podspec"; sourceTree = "<group>"; };
-		4F35F818BAEDC7E060C6AEDB /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		607FACE51AFB9204008FA782 /* WCAG-Colors_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WCAG-Colors_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		474CE47AE30BA1B12B1B7FDD /* WCAG-Colors.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "WCAG-Colors.podspec"; path = "../WCAG-Colors.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		4F35F818BAEDC7E060C6AEDB /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		607FACE51AFB9204008FA782 /* WCAG-Colors_Tests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WCAG-Colors_Tests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		696136955429799EE6C04382 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		696136955429799EE6C04382 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		83586A09268293E7005FB59D /* NSFontFontPropsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSFontFontPropsTests.swift; sourceTree = "<group>"; };
+		83586A0A268293E7005FB59D /* ImageAverageColorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAverageColorTests.swift; sourceTree = "<group>"; };
+		83586A0B268293E7005FB59D /* ConformanceLevelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConformanceLevelTests.swift; sourceTree = "<group>"; };
+		83586A0C268293E7005FB59D /* UIFontFontPropsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFontFontPropsTests.swift; sourceTree = "<group>"; };
+		83586A0D268293E7005FB59D /* ColorWcagTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorWcagTests.swift; sourceTree = "<group>"; };
+		83586A0E268293E7005FB59D /* RGBAColorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGBAColorTests.swift; sourceTree = "<group>"; };
+		83586A0F268293E7005FB59D /* FontPropsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontPropsTests.swift; sourceTree = "<group>"; };
+		83586A11268293E8005FB59D /* Image+mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+mock.swift"; sourceTree = "<group>"; };
+		83586A12268293E8005FB59D /* ImageAreaTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAreaTests.swift; sourceTree = "<group>"; };
+		83586A1F268293FB005FB59D /* LoggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerTests.swift; sourceTree = "<group>"; };
 		B4BC4B6D4B10844C6401DC13 /* Pods-WCAG-Colors_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WCAG-Colors_Tests.release.xcconfig"; path = "Target Support Files/Pods-WCAG-Colors_Tests/Pods-WCAG-Colors_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,7 +75,7 @@
 		607FACD11AFB9204008FA782 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				607FACE51AFB9204008FA782 /* WCAG-Colors_Tests.xctest */,
+				607FACE51AFB9204008FA782 /* WCAG-Colors_Tests-iOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -65,7 +83,16 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				607FACEB1AFB9204008FA782 /* Tests.swift */,
+				83586A1F268293FB005FB59D /* LoggerTests.swift */,
+				83586A0D268293E7005FB59D /* ColorWcagTests.swift */,
+				83586A0B268293E7005FB59D /* ConformanceLevelTests.swift */,
+				83586A0F268293E7005FB59D /* FontPropsTests.swift */,
+				83586A12268293E8005FB59D /* ImageAreaTests.swift */,
+				83586A0A268293E7005FB59D /* ImageAverageColorTests.swift */,
+				83586A10268293E8005FB59D /* Mocks */,
+				83586A09268293E7005FB59D /* NSFontFontPropsTests.swift */,
+				83586A0E268293E7005FB59D /* RGBAColorTests.swift */,
+				83586A0C268293E7005FB59D /* UIFontFontPropsTests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -89,23 +116,31 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
+		83586A10268293E8005FB59D /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				83586A11268293E8005FB59D /* Image+mock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		D802E999B9927D0C95D1005A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				3939E1073E906CD9CF7C7B74 /* Pods-WCAG-Colors_Tests.debug.xcconfig */,
 				B4BC4B6D4B10844C6401DC13 /* Pods-WCAG-Colors_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		607FACE41AFB9204008FA782 /* WCAG-Colors_Tests */ = {
+		607FACE41AFB9204008FA782 /* WCAG-Colors_Tests-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "WCAG-Colors_Tests" */;
+			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "WCAG-Colors_Tests-iOS" */;
 			buildPhases = (
+				83906A5026A74D7A00297EFC /* Run SwiftFormat */,
 				340A9D56847484A01D399936 /* [CP] Check Pods Manifest.lock */,
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
@@ -116,9 +151,9 @@
 			);
 			dependencies = (
 			);
-			name = "WCAG-Colors_Tests";
+			name = "WCAG-Colors_Tests-iOS";
 			productName = Tests;
-			productReference = 607FACE51AFB9204008FA782 /* WCAG-Colors_Tests.xctest */;
+			productReference = 607FACE51AFB9204008FA782 /* WCAG-Colors_Tests-iOS.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -131,14 +166,9 @@
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
-					607FACCF1AFB9204008FA782 = {
-						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 0900;
-					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
 						LastSwiftMigration = 0900;
-						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 				};
 			};
@@ -147,6 +177,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -155,7 +186,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				607FACE41AFB9204008FA782 /* WCAG-Colors_Tests */,
+				607FACE41AFB9204008FA782 /* WCAG-Colors_Tests-iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -193,6 +224,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		83906A5026A74D7A00297EFC /* Run SwiftFormat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftFormat";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd ../BuildTools\nSDKROOT=macosx\n#swift package update #Uncomment this line temporarily to update the version used to the latest matching your BuildTools/Package.swift file\nswift run -c release swiftformat \"$SRCROOT/..\" --config ../.swiftformat\n";
+		};
 		C9BED5C2172BE48217E65B45 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -222,7 +271,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				83586A15268293E8005FB59D /* ConformanceLevelTests.swift in Sources */,
+				83586A17268293E8005FB59D /* ColorWcagTests.swift in Sources */,
+				83586A18268293E8005FB59D /* RGBAColorTests.swift in Sources */,
+				83586A14268293E8005FB59D /* ImageAverageColorTests.swift in Sources */,
+				83586A1B268293E8005FB59D /* ImageAreaTests.swift in Sources */,
+				83586A20268293FB005FB59D /* LoggerTests.swift in Sources */,
+				83586A19268293E8005FB59D /* FontPropsTests.swift in Sources */,
+				83586A1A268293E8005FB59D /* Image+mock.swift in Sources */,
+				83586A16268293E8005FB59D /* UIFontFontPropsTests.swift in Sources */,
+				83586A13268293E8005FB59D /* NSFontFontPropsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,7 +332,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -320,7 +378,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -346,7 +404,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WCAG-Colors_Example.app/WCAG-Colors_Example";
 			};
 			name = Debug;
 		};
@@ -364,7 +421,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WCAG-Colors_Example.app/WCAG-Colors_Example";
 			};
 			name = Release;
 		};
@@ -380,7 +436,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "WCAG-Colors_Tests" */ = {
+		607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "WCAG-Colors_Tests-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				607FACF31AFB9204008FA782 /* Debug */,
