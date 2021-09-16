@@ -1,16 +1,26 @@
 # WCAG-Colors
 
-[![CI Status](https://img.shields.io/travis/chrs1885/WCAG-Colors.svg?style=flat)](https://travis-ci.org/chrs1885/WCAG-Colors)
 [![Version](https://img.shields.io/cocoapods/v/WCAG-Colors.svg?style=flat)](https://cocoapods.org/pods/WCAG-Colors)
 [![License](https://img.shields.io/cocoapods/l/WCAG-Colors.svg?style=flat)](https://cocoapods.org/pods/WCAG-Colors)
 [![Platform](https://img.shields.io/cocoapods/p/WCAG-Colors.svg?style=flat)](https://cocoapods.org/pods/WCAG-Colors)
 [![Twitter](https://img.shields.io/badge/twitter-%40chr__wendt-58a1f2.svg)](https://twitter.com/chr_wendt)
 
-## Example
+The *Web Content Accessibility Guidelines* (WCAG) define minimum contrast ratios for a text and its background. The WCAG-Colors framework extends `UIColor` and `NSColor` with functionality to use WCAG conformant colors within your apps to help people with visual disabilities to perceive content. 
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+It provides APIs for calculating:
 
-## Requirements
+* high contrast text color for a given background color
+* high contrast background color for a given text color
+* high contrast captions colot for a given background image
+* WCAG conformance levels
+* contrast ratios
+
+
+Internally, the provided colors will be mapped to an equivalent of the sRGB color space. All functions will return `nil` and log warnings] with further info in case any input color couldn't be converted. Also note that semi-transparent text colors will be blended with its background color. However, the alpha value of semi-transparent background colors will be ignored since the underlying color can't be determined.**
+
+## Documentation
+
+WCAG-Colors offers a whole lot of features along with a bunch of configurations. To find more about how to use them inside the [documentation](Documentation/Reference/README.md) section.
 
 ## Installation
 
@@ -22,9 +32,7 @@ There are currently four different ways to integrate WCAG-Colors into your apps.
 use_frameworks!
 
 target 'MyApp' do
-
   pod 'WCAG-Colors'
-
 end
 ```
 
@@ -44,11 +52,6 @@ Simply drop `WCAG-Colors.xcodeproj` into your project. Also make sure to add
 ## Usage
 
 <a id="colors"></a> 
-### High contrast colors (UIColor/NSColor extension)
-
-The *Web Content Accessibility Guidelines* (WCAG) define minimum contrast ratios for a text and its background. The WCAG-Colors framework extends `UIColor` and `NSColor` with functionality to use WCAG conformant colors within your apps to help people with visual disabilities to perceive content.
-
-Internally, the provided colors will be mapped to an equivalent of the sRGB color space. All functions will return `nil` and [log warnings](#logging) with further info in case any input color couldn't be converted. Also note that semi-transparent text colors will be blended with its background color. However, the alpha value of semi-transparent background colors will be ignored since the underlying color can't be determined.
 
 #### Text colors
 Get a high contrast text color for a given background color as follows:
@@ -138,6 +141,10 @@ Here's an overview of available conformance levels:
 ## Author
 
 chrs1885, chrs1885@gmail.com
+
+## Contributions
+
+We'd love to see you contributing to this project by proposing or adding features, reporting bugs, or spreading the word. Please have a quick look at our [contribution guidelines](./.github/CONTRIBUTING.md).
 
 ## License
 
