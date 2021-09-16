@@ -18,6 +18,10 @@ It provides APIs for calculating:
 
 Internally, the provided colors will be mapped to an equivalent of the sRGB color space. All functions will return `nil` and log warnings] with further info in case any input color couldn't be converted. Also note that semi-transparent text colors will be blended with its background color. However, the alpha value of semi-transparent background colors will be ignored since the underlying color can't be determined.**
 
+## Documentation
+
+WCAG-Colors offers a whole lot of features along with a bunch of configurations. To find more about how to use them inside the [documentation](Documentation/Reference/README.md) section.
+
 ## Installation
 
 There are currently four different ways to integrate WCAG-Colors into your apps.
