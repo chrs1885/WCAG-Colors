@@ -1,8 +1,12 @@
-# OS X
-.DS_Store
-
 # Xcode
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+## Build generated
 build/
+DerivedData/
+
+## Various settings
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -12,20 +16,26 @@ build/
 *.perspectivev3
 !default.perspectivev3
 xcuserdata/
-*.xccheckout
-profile
+
+## Other
+*.DS_Store
 *.moved-aside
-DerivedData
+*.xccheckout
+*.xcscmblueprint
+
+## Obj-C/Swift specific
 *.hmap
 *.ipa
+*.dSYM.zip
+*.dSYM
 
-# Bundler
-.bundle
+# Swift Package Manager
+#
+# Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
+# Packages/
+# Package.pins
+# Package.resolved
+.build/
 
-# Add this line if you want to avoid checking in source code from Carthage dependencies.
-# Carthage/Checkouts
-
-buildTools/.build
-buildTools/.swiftpm
-
-Example/Pods
+# SPM
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata

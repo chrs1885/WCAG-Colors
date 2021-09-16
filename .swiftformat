@@ -1,1 +1,1 @@
---exclude .build, Example/Pods, BuildTools
+--exclude .build
