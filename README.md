@@ -1,4 +1,4 @@
-# WCAG-Colors
+![logo](https://user-images.githubusercontent.com/1390908/133853563-3daef365-e890-41d2-ba6e-68cc9f17cd90.png)
 
 [![Version](https://img.shields.io/cocoapods/v/WCAG-Colors.svg?style=flat)](https://cocoapods.org/pods/WCAG-Colors)
 [![License](https://img.shields.io/cocoapods/l/WCAG-Colors.svg?style=flat)](https://cocoapods.org/pods/WCAG-Colors)
