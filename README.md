@@ -24,7 +24,7 @@ WCAG-Colors offers a whole lot of features along with a bunch of configurations.
 
 ## Installation
 
-There are currently four different ways to integrate WCAG-Colors into your apps.
+There are currently three different ways to integrate WCAG-Colors into your apps.
 
 ### CocoaPods
 
@@ -46,8 +46,7 @@ dependencies: [
 
 ### Manually
 
-Simply drop `WCAG-Colors.xcodeproj` into your project. Also make sure to add
-`WCAG-Colors.framework` to your app’s embedded frameworks found in the General tab of your main project.
+Simply drop the extension files into your project.
 
 ## Usage
 
