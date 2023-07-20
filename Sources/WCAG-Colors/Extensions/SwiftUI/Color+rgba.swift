@@ -6,8 +6,7 @@
 
 import SwiftUI
 
-@available(macOS 14.0, *)
-
+@available(iOS 17, tvOS 17, watchOS 10, macOS 14, *)
 extension Color {
     var rgbaColor: RGBAColor {
         func normalize(_ component: Float) -> CGFloat {

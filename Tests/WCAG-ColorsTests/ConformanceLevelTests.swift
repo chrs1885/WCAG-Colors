@@ -1,7 +1,7 @@
 //
 //  WCAG-Colors
 //
-//  Copyright (c) 2021 Christoph Wendt
+//  Copyright (c) 2023 Christoph Wendt
 //
 
 @testable import WCAG_Colors
@@ -10,12 +10,6 @@ import Quick
 
 class ConformanceLevelTests: QuickSpec {
     override func spec() {
-        struct Font {
-            static let large = FontProps(fontSize: 18.0, isBoldFont: false)
-            static let smallBold = FontProps(fontSize: 14.0, isBoldFont: true)
-            static let small = FontProps(fontSize: 14.0, isBoldFont: false)
-        }
-
         describe("The ConformanceLevel class") {
             var sut: ConformanceLevel?
 
@@ -23,7 +17,7 @@ class ConformanceLevelTests: QuickSpec {
                 context("with a contrast ratio of 2.9") {
                     context("and large text size") {
                         beforeEach {
-                            sut = ConformanceLevel(contrastRatio: 2.9, fontProps: Font.large)
+                            sut = ConformanceLevel(contrastRatio: 2.9, elementType: .largeFont)
                         }
 
                         it("returns .failed") {
@@ -35,7 +29,7 @@ class ConformanceLevelTests: QuickSpec {
                 context("with a contrast ratio of 3.0") {
                     context("and large text size") {
                         beforeEach {
-                            sut = ConformanceLevel(contrastRatio: 3.0, fontProps: Font.large)
+                            sut = ConformanceLevel(contrastRatio: 3.0, elementType: .largeFont)
                         }
 
                         it("returns .AA") {
@@ -47,7 +41,7 @@ class ConformanceLevelTests: QuickSpec {
                 context("with a contrast ratio of 4.4") {
                     context("and small text size") {
                         beforeEach {
-                            sut = ConformanceLevel(contrastRatio: 4.4, fontProps: Font.small)
+                            sut = ConformanceLevel(contrastRatio: 4.4, elementType: .smallFont)
                         }
 
                         it("returns .failed") {
@@ -57,7 +51,7 @@ class ConformanceLevelTests: QuickSpec {
 
                     context("and large text size") {
                         beforeEach {
-                            sut = ConformanceLevel(contrastRatio: 4.4, fontProps: Font.large)
+                            sut = ConformanceLevel(contrastRatio: 4.4, elementType: .largeFont)
                         }
 
                         it("returns .AA") {
@@ -69,7 +63,7 @@ class ConformanceLevelTests: QuickSpec {
                 context("with a contrast ratio of 4.5") {
                     context("and small text size") {
                         beforeEach {
-                            sut = ConformanceLevel(contrastRatio: 4.5, fontProps: Font.small)
+                            sut = ConformanceLevel(contrastRatio: 4.5, elementType: .smallFont)
                         }
 
                         it("returns .AA") {
@@ -79,7 +73,7 @@ class ConformanceLevelTests: QuickSpec {
 
                     context("and large text size") {
                         beforeEach {
-                            sut = ConformanceLevel(contrastRatio: 4.5, fontProps: Font.large)
+                            sut = ConformanceLevel(contrastRatio: 4.5, elementType: .largeFont)
                         }
 
                         it("returns .AAA") {
@@ -91,7 +85,7 @@ class ConformanceLevelTests: QuickSpec {
                 context("with a contrast ratio of 6.9") {
                     context("and small text size") {
                         beforeEach {
-                            sut = ConformanceLevel(contrastRatio: 6.9, fontProps: Font.small)
+                            sut = ConformanceLevel(contrastRatio: 6.9, elementType: .smallFont)
                         }
 
                         it("returns .AA") {
@@ -103,7 +97,7 @@ class ConformanceLevelTests: QuickSpec {
                 context("with a contrast ratio of 7.0") {
                     context("and small text size") {
                         beforeEach {
-                            sut = ConformanceLevel(contrastRatio: 7.0, fontProps: Font.small)
+                            sut = ConformanceLevel(contrastRatio: 7.0, elementType: .smallFont)
                         }
 
                         it("returns .AAA") {

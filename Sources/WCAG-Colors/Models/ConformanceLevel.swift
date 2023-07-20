@@ -1,7 +1,7 @@
 //
 //  WCAG-Colors
 //
-//  Copyright (c) 2021 Christoph Wendt
+//  Copyright (c) 2023 Christoph Wendt
 //
 
 import CoreGraphics
@@ -25,36 +25,26 @@ public enum ConformanceLevel: Int {
 
 extension ConformanceLevel {
     /**
-     Initializes a ConformanceLevel based on a given contrast ratio and font information used for the text.
+     Initializes a ConformanceLevel based on a given contrast ratio and the application of the color pair.
 
      - Parameters:
          - contrastRatio: The contrast ratio of a text and its background.
-         - fontSize: The font size of the text.
-         - isBoldFont: Information regarding the font weight.
+         - elementType: The application of the color pair.
      */
-    public init(contrastRatio: CGFloat, fontSize: CGFloat, isBoldFont: Bool) {
-        let fontProps = FontProps(fontSize: fontSize, isBoldFont: isBoldFont)
-        self.init(contrastRatio: contrastRatio, fontProps: fontProps)
-    }
+    public init(contrastRatio: CGFloat, elementType: ElementType) {
+        self = ConformanceLevel.failed
 
-    init(contrastRatio: CGFloat, fontProps: FontProps) {
-        var value = ConformanceLevel.failed
-
-        if fontProps.isLargeText {
-            if contrastRatio >= 4.5 {
-                value = .AAA
-            } else if contrastRatio >= 3.0 {
-                value = .AA
-            }
-        } else {
-            if contrastRatio >= 7.0 {
-                value = .AAA
-            } else if contrastRatio >= 4.5 {
-                value = .AA
-            }
+        switch elementType {
+        case .smallFont:
+            guard contrastRatio >= 4.5 else { break }
+            self = contrastRatio >= 7.0 ? .AAA : .AA
+        case .largeFont:
+            guard contrastRatio >= 3.0 else { break }
+            self = contrastRatio >= 4.5 ? .AAA : .AA
+        case .uiComponents:
+            guard contrastRatio >= 3.0 else { break }
+            self = .AA
         }
-
-        self = value
     }
 
     /// The text representation of the conformance level.

@@ -1,7 +1,7 @@
 //
 //  WCAG-Colors
 //
-//  Copyright (c) 2021 Christoph Wendt
+//  Copyright (c) 2023 Christoph Wendt
 //
 
 #if os(iOS) || os(tvOS) || os(watchOS)
@@ -41,12 +41,12 @@ public extension TypeColor {
 
      - Warning: This function will also return `nil` if any input color is not convertable to the sRGB color space.
      */
-    class func getContrastRatio(forTextColor textColor: TypeColor, onBackgroundColor backgroundColor: TypeColor) -> CGFloat? {
+    class func getContrastRatio(textColor: TypeColor, backgroundColor: TypeColor) -> CGFloat? {
         guard let rgbaTextColor = textColor.rgbaColor, let rgbaBackgroundColor = backgroundColor.rgbaColor else {
             return nil
         }
 
-        return RGBAColor.getContrastRatio(forTextColor: rgbaTextColor, onBackgroundColor: rgbaBackgroundColor)
+        return RGBAColor.getContrastRatio(textColor: rgbaTextColor, backgroundColor: rgbaBackgroundColor)
     }
 
     /**
@@ -61,9 +61,9 @@ public extension TypeColor {
 
      - Warning: This function will also return `nil` if any input color is not convertable to the sRGB color space.
      */
-    class func getTextColor(onBackgroundColor backgroundColor: TypeColor) -> TypeColor? {
+    class func getTextColor(backgroundColor: TypeColor) -> TypeColor? {
         guard let rgbaBackgroundColor = backgroundColor.rgbaColor else { return nil }
-        let textColor = RGBAColor.getTextColor(onBackgroundColor: rgbaBackgroundColor)
+        let textColor = RGBAColor.getTextColor(backgroundColor: rgbaBackgroundColor)
 
         return textColor == RGBAColor.Colors.black ? .black : .white
     }
@@ -73,7 +73,7 @@ public extension TypeColor {
 
      - Parameters:
          - colors: A list of possible text colors.
-         - font: The font used for the text.
+         - elementType: The application of the color pair.
          - backgroundColor: The background color that the text should be displayed on.
          - conformanceLevel: The conformance level that needs to be passed when calculating the contrast ratio. The default conformance level is .AA.
 
@@ -83,13 +83,13 @@ public extension TypeColor {
 
      - Warning: This function will also return `nil` if any input color is not convertable to the sRGB color space.
      */
-    class func getTextColor(fromColors colors: [TypeColor], withFont font: TypeFont, onBackgroundColor backgroundColor: TypeColor, conformanceLevel: ConformanceLevel = .AA) -> TypeColor? {
+    class func getTextColor(colors: [TypeColor], elementType: ElementType, backgroundColor: TypeColor, conformanceLevel: ConformanceLevel = .AA) -> TypeColor? {
         guard let rgbaBackgroundColor = backgroundColor.rgbaColor else { return nil }
 
         for textColor in colors {
             guard let rgbaTextColor = textColor.rgbaColor else { return nil }
 
-            let isValidTextColor = RGBAColor.isValidColorCombination(textColor: rgbaTextColor, fontProps: font.fontProps, onBackgroundColor: rgbaBackgroundColor, conformanceLevel: conformanceLevel)
+            let isValidTextColor = RGBAColor.isValidColorCombination(textColor: rgbaTextColor, elementType: elementType, backgroundColor: rgbaBackgroundColor, conformanceLevel: conformanceLevel)
             if isValidTextColor {
                 return textColor
             }
@@ -113,10 +113,10 @@ public extension TypeColor {
 
          - Warning: This function will also return `nil` if the image is corrupted.
          */
-        class func getTextColor(onBackgroundImage image: TypeImage, imageArea: ImageArea = .full) -> TypeColor? {
+        class func getTextColor(backgroundImage image: TypeImage, imageArea: ImageArea = .full) -> TypeColor? {
             guard let averageImageColor = image.averageColor(imageArea: imageArea) else { return nil }
 
-            return TypeColor.getTextColor(onBackgroundColor: averageImageColor)
+            return TypeColor.getTextColor(backgroundColor: averageImageColor)
         }
 
         /**
@@ -124,7 +124,7 @@ public extension TypeColor {
 
          - Parameters:
          - colors: A list of possible text colors.
-         - font: The font used for the text.
+         - elementType: The application of the color pair.
          - backgroundImage: The background image that the text should be displayed on.
          - imageArea: The area of the image that is used as the text background. Defaults to .full.
          - conformanceLevel: The conformance level that needs to be passed when calculating the contrast ratio. The default conformance level is .AA.
@@ -135,10 +135,10 @@ public extension TypeColor {
 
          - Warning: This function will also return `nil` if any input color is not convertable to the sRGB color space.
          */
-        class func getTextColor(fromColors colors: [TypeColor], withFont font: TypeFont, onBackgroundImage image: TypeImage, imageArea: ImageArea = .full, conformanceLevel: ConformanceLevel = .AA) -> TypeColor? {
-            guard let averageImageColor = image.averageColor(imageArea: imageArea) else { return nil }
+        class func getTextColor(colors: [TypeColor], elementType: ElementType, backgroundImage: TypeImage, imageArea: ImageArea = .full, conformanceLevel: ConformanceLevel = .AA) -> TypeColor? {
+            guard let averageImageColor = backgroundImage.averageColor(imageArea: imageArea) else { return nil }
 
-            return TypeColor.getTextColor(fromColors: colors, withFont: font, onBackgroundColor: averageImageColor, conformanceLevel: conformanceLevel)
+            return TypeColor.getTextColor(colors: colors, elementType: elementType, backgroundColor: averageImageColor, conformanceLevel: conformanceLevel)
         }
 
     #endif
@@ -155,9 +155,9 @@ public extension TypeColor {
 
      - Warning: This function will also return `nil` if any input color is not convertable to the sRGB color space.
      */
-    class func getBackgroundColor(forTextColor textColor: TypeColor) -> TypeColor? {
+    class func getBackgroundColor(textColor: TypeColor) -> TypeColor? {
         guard let rgbaTextColor = textColor.rgbaColor else { return nil }
-        let backgroundColor = RGBAColor.getBackgroundColor(forTextColor: rgbaTextColor)
+        let backgroundColor = RGBAColor.getBackgroundColor(textColor: rgbaTextColor)
 
         return backgroundColor == RGBAColor.Colors.black ? .black : .white
     }
@@ -168,7 +168,7 @@ public extension TypeColor {
      - Parameters:
          - colors: A list of possible background colors.
          - textColor: The text color that should be used.
-         - font: The font used for the text.
+         - elementType: The application of the color pair.
          - conformanceLevel: The conformance level that needs to be passed when calculating the contrast ratio. The default conformance level is .AA.
 
      - Returns: The first color that conforms to the conformance level defined or `nil` if non of the colors provided passed.
@@ -177,13 +177,13 @@ public extension TypeColor {
 
      - Warning: This function will also return `nil` if any input color is not convertable to the sRGB color space.
      */
-    class func getBackgroundColor(fromColors colors: [TypeColor], forTextColor textColor: TypeColor, withFont font: TypeFont, conformanceLevel: ConformanceLevel = .AA) -> TypeColor? {
+    class func getBackgroundColor(colors: [TypeColor], textColor: TypeColor, elementType: ElementType, conformanceLevel: ConformanceLevel = .AA) -> TypeColor? {
         guard let rgbaTextColor = textColor.rgbaColor else { return nil }
 
         for backgroundColor in colors {
             guard let rgbaBackgroundColor = backgroundColor.rgbaColor else { return nil }
 
-            let isValidBackgroundColor = RGBAColor.isValidColorCombination(textColor: rgbaTextColor, fontProps: font.fontProps, onBackgroundColor: rgbaBackgroundColor, conformanceLevel: conformanceLevel)
+            let isValidBackgroundColor = RGBAColor.isValidColorCombination(textColor: rgbaTextColor, elementType: elementType, backgroundColor: rgbaBackgroundColor, conformanceLevel: conformanceLevel)
             if isValidBackgroundColor {
                 return backgroundColor
             }

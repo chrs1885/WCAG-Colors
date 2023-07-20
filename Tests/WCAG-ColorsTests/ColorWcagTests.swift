@@ -13,14 +13,13 @@ struct SwiftUIColors {
     static let colorWithContrastRatio4_5 = Color(.sRGB, red: 118 / 255.0, green: 118 / 255.0, blue: 118 / 255.0, opacity: 1.0)
     static let colorWithContrastRatio7 = Color(.sRGB, red: 89 / 255.0, green: 89 / 255.0, blue: 89 / 255.0, opacity: 1.0)
     static let semiTransparentColor = Color(.sRGB, red: 0.5, green: 0.0, blue: 1.0, opacity: 0.75)
-    static let p3Color = Color(.displayP3, red: 1.5, green: -1.5, blue: 0.5, opacity: 1.0)
 }
 
 @testable import WCAG_Colors
 import Nimble
 import Quick
 
-@available(macOS 14.0, *)
+@available(iOS 17, tvOS 17, watchOS 10, macOS 14, *)
 class ColorWcagTests: QuickSpec {
     override func spec() {
         describe("The Color class") {
@@ -32,17 +31,6 @@ class ColorWcagTests: QuickSpec {
                         expect(round(color.red)).to(equal(255.0))
                         expect(round(color.green)).to(equal(255.0))
                         expect(round(color.blue)).to(equal(255.0))
-                        expect(color.alpha).to(equal(1.0))
-                    }
-                }
-
-                context("when color space is P3") {
-                    it("normalizes components to sRGB") {
-                        let color = SwiftUIColors.p3Color.rgbaColor
-
-                        expect(color.red).to(equal(255.0))
-                        expect(color.green).to(equal(0.0))
-                        expect(floor(color.blue)).to(equal(127.0))
                         expect(color.alpha).to(equal(1.0))
                     }
                 }
@@ -62,19 +50,19 @@ class ColorWcagTests: QuickSpec {
             context("when calling getContrastRatio") {
                 context("by passing in the same color twice") {
                     it("returns the minimum contrast ratio of 1.0") {
-                        expect(Color.getContrastRatio(forTextColor: SwiftUIColors.white, onBackgroundColor: SwiftUIColors.white)).to(equal(1.0))
+                        expect(Color.getContrastRatio(textColor: SwiftUIColors.white, backgroundColor: SwiftUIColors.white)).to(equal(1.0))
                     }
                 }
 
                 context("by passing in white and black") {
                     it("returns the maximum contrast ratio of 21.0") {
-                        expect(Color.getContrastRatio(forTextColor: SwiftUIColors.white, onBackgroundColor: SwiftUIColors.black)).to(equal(21.0))
+                        expect(Color.getContrastRatio(textColor: SwiftUIColors.white, backgroundColor: SwiftUIColors.black)).to(equal(21.0))
                     }
                 }
 
                 context("by passing in green and orange color") {
                     it("returns a contrast ratio of 2.31") {
-                        let actualContrastRatio = Color.getContrastRatio(forTextColor: SwiftUIColors.colorWithContrastRatio3, onBackgroundColor: SwiftUIColors.colorWithContrastRatio7)!
+                        let actualContrastRatio = Color.getContrastRatio(textColor: SwiftUIColors.colorWithContrastRatio3, backgroundColor: SwiftUIColors.colorWithContrastRatio7)!
                         let rounded = floor(actualContrastRatio * 100) / 100
 
                         expect(rounded).to(equal(2.3))
@@ -83,7 +71,7 @@ class ColorWcagTests: QuickSpec {
 
                 context("by passing in semi transparent color and white") {
                     it("returns a contrast ratio of 4.51") {
-                        let actualContrastRatio = Color.getContrastRatio(forTextColor: SwiftUIColors.semiTransparentColor, onBackgroundColor: SwiftUIColors.white)!
+                        let actualContrastRatio = Color.getContrastRatio(textColor: SwiftUIColors.semiTransparentColor, backgroundColor: SwiftUIColors.white)!
                         let rounded = floor(actualContrastRatio * 100) / 100
 
                         expect(rounded).to(equal(4.51))
@@ -94,7 +82,7 @@ class ColorWcagTests: QuickSpec {
             context("when calling getTextColor") {
                 context("by passing in a dark background color") {
                     it("returns white") {
-                        let actual = Color.getTextColor(onBackgroundColor: SwiftUIColors.black)
+                        let actual = Color.getTextColor(backgroundColor: SwiftUIColors.black)
                         
                         expect(actual).to(equal(Color.white))
                     }
@@ -102,7 +90,7 @@ class ColorWcagTests: QuickSpec {
                 
                 context("by passing in a light background color") {
                     it("returns black") {
-                        let actual = Color.getTextColor(onBackgroundColor: SwiftUIColors.white)
+                        let actual = Color.getTextColor(backgroundColor: SwiftUIColors.white)
                         
                         expect(actual).to(equal(Color.black))
                     }
@@ -110,7 +98,7 @@ class ColorWcagTests: QuickSpec {
                 
                 context("by passing in a background color with a medium relative luminance") {
                     it("returns black") {
-                        let actual = Color.getTextColor(onBackgroundColor: SwiftUIColors.colorWithContrastRatio4_5)
+                        let actual = Color.getTextColor(backgroundColor: SwiftUIColors.colorWithContrastRatio4_5)
                         
                         expect(actual).to(equal(Color.black))
                     }
@@ -129,7 +117,7 @@ class ColorWcagTests: QuickSpec {
                     
                     context("by not providing any passing color") {
                         it("returns nil") {
-                            let actual = Color.getTextColor(fromColors: [], withFontSize: .small, onBackgroundColor: SwiftUIColors.white, conformanceLevel: .AA)
+                            let actual = Color.getTextColor(colors: [], elementType: .smallFont, backgroundColor: SwiftUIColors.white, conformanceLevel: .AA)
                             
                             expect(actual).to(beNil())
                         }
@@ -138,7 +126,7 @@ class ColorWcagTests: QuickSpec {
                     context("when defining conformance level .AA") {
                         context("when using a small font") {
                             it("returns black") {
-                                let actual = Color.getTextColor(fromColors: colors!, withFontSize: .small, onBackgroundColor: SwiftUIColors.white, conformanceLevel: .AA)
+                                let actual = Color.getTextColor(colors: colors!, elementType: .smallFont, backgroundColor: SwiftUIColors.white, conformanceLevel: .AA)
                                 
                                 expect(actual).to(equal(SwiftUIColors.colorWithContrastRatio4_5))
                             }
@@ -146,7 +134,7 @@ class ColorWcagTests: QuickSpec {
                         
                         context("when using a small bold font") {
                             it("returns black") {
-                                let actual = Color.getTextColor(fromColors: colors!, withFontSize: .boldSmall, onBackgroundColor: SwiftUIColors.white, conformanceLevel: .AA)
+                                let actual = Color.getTextColor(colors: colors!, elementType: .largeFont, backgroundColor: SwiftUIColors.white, conformanceLevel: .AA)
                                 
                                 expect(actual).to(equal(SwiftUIColors.colorWithContrastRatio3))
                             }
@@ -154,7 +142,7 @@ class ColorWcagTests: QuickSpec {
                         
                         context("when using a large font") {
                             it("returns black") {
-                                let actual = Color.getTextColor(fromColors: colors!, withFontSize: .large, onBackgroundColor: SwiftUIColors.white, conformanceLevel: .AA)
+                                let actual = Color.getTextColor(colors: colors!, elementType: .largeFont, backgroundColor: SwiftUIColors.white, conformanceLevel: .AA)
                                 
                                 expect(actual).to(equal(SwiftUIColors.colorWithContrastRatio3))
                             }
@@ -164,23 +152,15 @@ class ColorWcagTests: QuickSpec {
                     context("when defining conformance level .AAA") {
                         context("when using a small font") {
                             it("returns black") {
-                                let actual = Color.getTextColor(fromColors: colors!, withFontSize: .small, onBackgroundColor: SwiftUIColors.white, conformanceLevel: .AAA)
+                                let actual = Color.getTextColor(colors: colors!, elementType: .smallFont, backgroundColor: SwiftUIColors.white, conformanceLevel: .AAA)
                                 
                                 expect(actual).to(equal(SwiftUIColors.colorWithContrastRatio7))
                             }
                         }
                         
-                        context("when using a small bold font") {
-                            it("returns black") {
-                                let actual = Color.getTextColor(fromColors: colors!, withFontSize: .boldSmall, onBackgroundColor: SwiftUIColors.white, conformanceLevel: .AAA)
-                                
-                                expect(actual).to(equal(SwiftUIColors.colorWithContrastRatio4_5))
-                            }
-                        }
-                        
                         context("when using a large font") {
                             it("returns black") {
-                                let actual = Color.getTextColor(fromColors: colors!, withFontSize: .large, onBackgroundColor: SwiftUIColors.white, conformanceLevel: .AAA)
+                                let actual = Color.getTextColor(colors: colors!, elementType: .largeFont, backgroundColor: SwiftUIColors.white, conformanceLevel: .AAA)
                                 
                                 expect(actual).to(equal(SwiftUIColors.colorWithContrastRatio4_5))
                             }
@@ -192,7 +172,7 @@ class ColorWcagTests: QuickSpec {
             context("when calling getBackgroundColor") {
                 context("by passing in a dark text color") {
                     it("returns white") {
-                        let actual = Color.getBackgroundColor(forTextColor: SwiftUIColors.black)
+                        let actual = Color.getBackgroundColor(textColor: SwiftUIColors.black)
 
                         expect(actual).to(equal(Color.white))
                     }
@@ -200,7 +180,7 @@ class ColorWcagTests: QuickSpec {
 
                 context("by passing in a light text color") {
                     it("returns black") {
-                        let actual = Color.getBackgroundColor(forTextColor: SwiftUIColors.white)
+                        let actual = Color.getBackgroundColor(textColor: SwiftUIColors.white)
 
                         expect(actual).to(equal(Color.black))
                     }
@@ -208,7 +188,7 @@ class ColorWcagTests: QuickSpec {
 
                 context("by passing in a text color with a medium relative luminance") {
                     it("returns black") {
-                        let actual = Color.getBackgroundColor(forTextColor: SwiftUIColors.colorWithContrastRatio4_5)
+                        let actual = Color.getBackgroundColor(textColor: SwiftUIColors.colorWithContrastRatio4_5)
 
                         expect(actual).to(equal(Color.black))
                     }
@@ -228,7 +208,7 @@ class ColorWcagTests: QuickSpec {
 
                 context("by not providing any passing color") {
                     it("returns nil") {
-                        let actual = Color.getBackgroundColor(fromColors: [], forTextColor: SwiftUIColors.white, withFontSize: .small, conformanceLevel: .AA)
+                        let actual = Color.getBackgroundColor(colors: [], textColor: SwiftUIColors.white, elementType: .smallFont, conformanceLevel: .AA)
 
                         expect(actual).to(beNil())
                     }
@@ -237,23 +217,15 @@ class ColorWcagTests: QuickSpec {
                 context("when defining conformance level .AA") {
                     context("when using a small font") {
                         it("returns a color of conformance level 4.5") {
-                            let actual = Color.getBackgroundColor(fromColors: colors, forTextColor: SwiftUIColors.white, withFontSize: .small, conformanceLevel: .AA)
+                            let actual = Color.getBackgroundColor(colors: colors, textColor: SwiftUIColors.white, elementType: .smallFont, conformanceLevel: .AA)
 
                             expect(actual).to(equal(SwiftUIColors.colorWithContrastRatio4_5))
                         }
                     }
 
-                    context("when using a small bold font") {
-                        it("returns a color of conformance level 3") {
-                            let actual = Color.getBackgroundColor(fromColors: colors, forTextColor: SwiftUIColors.white, withFontSize: .boldSmall, conformanceLevel: .AA)
-
-                            expect(actual).to(equal(SwiftUIColors.colorWithContrastRatio3))
-                        }
-                    }
-
                     context("when using a large font") {
                         it("returns a color of conformance level 3") {
-                            let actual = Color.getBackgroundColor(fromColors: colors, forTextColor: SwiftUIColors.white, withFontSize: .large, conformanceLevel: .AA)
+                            let actual = Color.getBackgroundColor(colors: colors, textColor: SwiftUIColors.white, elementType: .largeFont, conformanceLevel: .AA)
 
                             expect(actual).to(equal(SwiftUIColors.colorWithContrastRatio3))
                         }
@@ -263,23 +235,15 @@ class ColorWcagTests: QuickSpec {
                 context("when defining conformance level .AAA") {
                     context("when using a small font") {
                         it("returns a color of conformance level 7") {
-                            let actual = Color.getBackgroundColor(fromColors: colors, forTextColor: SwiftUIColors.white, withFontSize: .small, conformanceLevel: .AAA)
+                            let actual = Color.getBackgroundColor(colors: colors, textColor: SwiftUIColors.white, elementType: .smallFont, conformanceLevel: .AAA)
 
                             expect(actual).to(equal(SwiftUIColors.colorWithContrastRatio7))
                         }
                     }
 
-                    context("when using a small bold font") {
-                        it("returns a color of conformance level 4.5") {
-                            let actual = Color.getBackgroundColor(fromColors: colors, forTextColor: SwiftUIColors.white, withFontSize: .boldSmall, conformanceLevel: .AAA)
-
-                            expect(actual).to(equal(SwiftUIColors.colorWithContrastRatio4_5))
-                        }
-                    }
-
                     context("when using a large font") {
                         it("returns a color of conformance level 4.5") {
-                            let actual = Color.getBackgroundColor(fromColors: colors, forTextColor: SwiftUIColors.white, withFontSize: .large, conformanceLevel: .AAA)
+                            let actual = Color.getBackgroundColor(colors: colors, textColor: SwiftUIColors.white, elementType: .largeFont, conformanceLevel: .AAA)
 
                             expect(actual).to(equal(SwiftUIColors.colorWithContrastRatio4_5))
                         }

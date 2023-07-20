@@ -1,7 +1,7 @@
 //
 //  WCAG-Colors
 //
-//  Copyright (c) 2021 Christoph Wendt
+//  Copyright (c) 2023 Christoph Wendt
 //
 
 import CoreGraphics
@@ -35,7 +35,7 @@ struct RGBAColor: Equatable {
 // MARK: - Calculating color properties
 
 extension RGBAColor {
-    static func getContrastRatio(forTextColor textColor: RGBAColor, onBackgroundColor backgroundColor: RGBAColor) -> CGFloat {
+    static func getContrastRatio(textColor: RGBAColor, backgroundColor: RGBAColor) -> CGFloat {
         let blendedColor = textColor.alpha < 1.0 ? textColor.blended(withFraction: textColor.alpha, ofColor: backgroundColor) : textColor
 
         let textColorLuminance = blendedColor.relativeLuminance
@@ -44,9 +44,9 @@ extension RGBAColor {
         return (max(textColorLuminance, backgroundColorLuminance) + 0.05) / (min(textColorLuminance, backgroundColorLuminance) + 0.05)
     }
 
-    static func isValidColorCombination(textColor: RGBAColor, fontProps: FontProps, onBackgroundColor backgroundColor: RGBAColor, conformanceLevel: ConformanceLevel) -> Bool {
-        let contrastRatio = RGBAColor.getContrastRatio(forTextColor: textColor, onBackgroundColor: backgroundColor)
-        let currentConformanceLevel = ConformanceLevel(contrastRatio: contrastRatio, fontProps: fontProps)
+    static func isValidColorCombination(textColor: RGBAColor, elementType: ElementType, backgroundColor: RGBAColor, conformanceLevel: ConformanceLevel) -> Bool {
+        let contrastRatio = RGBAColor.getContrastRatio(textColor: textColor, backgroundColor: backgroundColor)
+        let currentConformanceLevel = ConformanceLevel(contrastRatio: contrastRatio, elementType: elementType)
 
         return currentConformanceLevel >= conformanceLevel
     }
@@ -55,7 +55,7 @@ extension RGBAColor {
 // MARK: - Text colors
 
 extension RGBAColor {
-    static func getTextColor(onBackgroundColor backgroundColor: RGBAColor) -> RGBAColor {
+    static func getTextColor(backgroundColor: RGBAColor) -> RGBAColor {
         let luminance = backgroundColor.relativeLuminance
 
         return luminance > 0.179 ? Colors.black : Colors.white
@@ -65,10 +65,10 @@ extension RGBAColor {
 // MARK: - Background colors
 
 extension RGBAColor {
-    static func getBackgroundColor(forTextColor textColor: RGBAColor) -> RGBAColor {
+    static func getBackgroundColor(textColor: RGBAColor) -> RGBAColor {
         if textColor.alpha < 1.0 {
-            let whiteContrastRatio = getContrastRatio(forTextColor: textColor, onBackgroundColor: Colors.white)
-            let blackContrastRatio = getContrastRatio(forTextColor: textColor, onBackgroundColor: Colors.black)
+            let whiteContrastRatio = getContrastRatio(textColor: textColor, backgroundColor: Colors.white)
+            let blackContrastRatio = getContrastRatio(textColor: textColor, backgroundColor: Colors.black)
 
             return whiteContrastRatio > blackContrastRatio ? Colors.white : Colors.black
         } else {
