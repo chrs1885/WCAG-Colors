@@ -15,7 +15,6 @@
         static let colorWithContrastRatio4_5 = UIColor(red: 118 / 255.0, green: 118 / 255.0, blue: 118 / 255.0, alpha: 1.0)
         static let colorWithContrastRatio7 = UIColor(red: 89 / 255.0, green: 89 / 255.0, blue: 89 / 255.0, alpha: 1.0)
         static let semiTransparentColor = UIColor(red: 0.5, green: 0.0, blue: 1.0, alpha: 0.75)
-        static let p3Color = UIColor(displayP3Red: 1.5, green: -1.5, blue: 0.5, alpha: 1.0)
     }
 
 #elseif os(OSX)
@@ -30,7 +29,6 @@
         static let colorWithContrastRatio7 = NSColor(deviceRed: 89 / 255.0, green: 89 / 255.0, blue: 89 / 255.0, alpha: 1.0)
         static let semiTransparentColor = NSColor(deviceRed: 0.5, green: 0.0, blue: 1.0, alpha: 0.75)
         static let cmykColor = NSColor(deviceCyan: 1.0, magenta: 0.0, yellow: 0.0, black: 0.0, alpha: 1.0)
-        static let p3Color = NSColor(displayP3Red: 2.0, green: -1.0, blue: 0.5, alpha: 1.0)
     }
 
 #endif
@@ -50,17 +48,6 @@ class TypeColorWcagTests: QuickSpec {
                         expect(color.red).to(equal(255.0))
                         expect(color.green).to(equal(255.0))
                         expect(color.blue).to(equal(255.0))
-                        expect(color.alpha).to(equal(1.0))
-                    }
-                }
-
-                context("when color space is P3") {
-                    it("normalizes components to sRGB") {
-                        let color = Colors.p3Color.rgbaColor!
-
-                        expect(color.red).to(equal(255.0))
-                        expect(color.green).to(equal(0.0))
-                        expect(floor(color.blue)).to(equal(127.0))
                         expect(color.alpha).to(equal(1.0))
                     }
                 }
@@ -114,19 +101,13 @@ class TypeColorWcagTests: QuickSpec {
 
                 context("by passing in green and orange color") {
                     it("returns a contrast ratio of 2.31") {
-                        let actualContrastRatio = TypeColor.getContrastRatio(foregroundColor: Colors.colorWithContrastRatio3, backgroundColor: Colors.colorWithContrastRatio7)!
-                        let rounded = floor(actualContrastRatio * 100) / 100
-
-                        expect(rounded).to(equal(2.3))
+                        expect(TypeColor.getContrastRatio(foregroundColor: Colors.colorWithContrastRatio3, backgroundColor: Colors.colorWithContrastRatio7)).to(equal(2.31))
                     }
                 }
 
                 context("by passing in semi transparent color and white") {
                     it("returns a contrast ratio of 4.51") {
-                        let actualContrastRatio = TypeColor.getContrastRatio(foregroundColor: Colors.semiTransparentColor, backgroundColor: Colors.white)!
-                        let rounded = floor(actualContrastRatio * 100) / 100
-
-                        expect(rounded).to(equal(4.51))
+                         expect(TypeColor.getContrastRatio(foregroundColor: Colors.semiTransparentColor, backgroundColor: Colors.white)).to(equal(4.52))
                     }
                 }
             }

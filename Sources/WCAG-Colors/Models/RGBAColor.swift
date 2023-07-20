@@ -41,7 +41,9 @@ extension RGBAColor {
         let foregroundColorLuminance = blendedColor.relativeLuminance
         let backgroundColorLuminance = backgroundColor.relativeLuminance
 
-        return (max(foregroundColorLuminance, backgroundColorLuminance) + 0.05) / (min(foregroundColorLuminance, backgroundColorLuminance) + 0.05)
+        let colorContrast = (max(foregroundColorLuminance, backgroundColorLuminance) + 0.05) / (min(foregroundColorLuminance, backgroundColorLuminance) + 0.05)
+        
+        return ceil(colorContrast * 100) / 100.0
     }
 
     static func isValidColorCombination(foregroundColor: RGBAColor, elementType: ElementType, backgroundColor: RGBAColor, conformanceLevel: ConformanceLevel) -> Bool {

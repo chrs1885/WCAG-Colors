@@ -14,7 +14,7 @@ extension Color {
 
             if nomralizedValue > 255.0 { return 255.0 }
             if nomralizedValue < 0.0 { return 0.0 }
-            return nomralizedValue
+            return ceil(nomralizedValue * 100) / 100.0
         }
         
         let color = self.resolve(in: EnvironmentValues())

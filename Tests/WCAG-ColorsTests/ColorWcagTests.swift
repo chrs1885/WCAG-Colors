@@ -28,9 +28,9 @@ class ColorWcagTests: QuickSpec {
                     it("normalizes components to be between 0.0 and 255.0") {
                         let color = SwiftUIColors.white.rgbaColor
 
-                        expect(round(color.red)).to(equal(255.0))
-                        expect(round(color.green)).to(equal(255.0))
-                        expect(round(color.blue)).to(equal(255.0))
+                        expect(color.red).to(equal(255.0))
+                        expect(color.green).to(equal(255.0))
+                        expect(color.blue).to(equal(255.0))
                         expect(color.alpha).to(equal(1.0))
                     }
                 }
@@ -39,9 +39,9 @@ class ColorWcagTests: QuickSpec {
                     it("uses white value for each color component") {
                         let color = SwiftUIColors.white.rgbaColor
 
-                        expect(round(color.red)).to(equal(255.0))
-                        expect(round(color.green)).to(equal(255.0))
-                        expect(round(color.blue)).to(equal(255.0))
+                        expect(color.red).to(equal(255.0))
+                        expect(color.green).to(equal(255.0))
+                        expect(color.blue).to(equal(255.0))
                         expect(color.alpha).to(equal(1.0))
                     }
                 }
@@ -62,19 +62,13 @@ class ColorWcagTests: QuickSpec {
 
                 context("by passing in green and orange color") {
                     it("returns a contrast ratio of 2.31") {
-                        let actualContrastRatio = Color.getContrastRatio(foregroundColor: SwiftUIColors.colorWithContrastRatio3, backgroundColor: SwiftUIColors.colorWithContrastRatio7)!
-                        let rounded = floor(actualContrastRatio * 100) / 100
-
-                        expect(rounded).to(equal(2.3))
+                        expect(Color.getContrastRatio(foregroundColor: SwiftUIColors.colorWithContrastRatio3, backgroundColor: SwiftUIColors.colorWithContrastRatio7)).to(equal(2.31))
                     }
                 }
 
                 context("by passing in semi transparent color and white") {
                     it("returns a contrast ratio of 4.51") {
-                        let actualContrastRatio = Color.getContrastRatio(foregroundColor: SwiftUIColors.semiTransparentColor, backgroundColor: SwiftUIColors.white)!
-                        let rounded = floor(actualContrastRatio * 100) / 100
-
-                        expect(rounded).to(equal(4.51))
+                        expect(Color.getContrastRatio(foregroundColor: SwiftUIColors.semiTransparentColor, backgroundColor: SwiftUIColors.white)).to(equal(4.52))
                     }
                 }
             }
