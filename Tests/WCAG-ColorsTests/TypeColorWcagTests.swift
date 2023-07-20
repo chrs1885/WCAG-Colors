@@ -172,6 +172,14 @@ class TypeColorWcagTests: QuickSpec {
                                 expect(actual).to(equal(Colors.colorWithContrastRatio3))
                             }
                         }
+                        
+                        context("when using an UI component") {
+                            it("returns black") {
+                                let actual = TypeColor.getForegroundColor(colors: colors!, elementType: .uiComponents, backgroundColor: Colors.white, conformanceLevel: .AA)
+
+                                expect(actual).to(equal(Colors.colorWithContrastRatio3))
+                            }
+                        }
                     }
 
                     context("when defining conformance level .AAA") {
@@ -259,6 +267,14 @@ class TypeColorWcagTests: QuickSpec {
                                     expect(actual).to(equal(Colors.colorWithContrastRatio3))
                                 }
                             }
+                            
+                            context("when using an UI component") {
+                                it("returns a color of conformance level 3") {
+                                    let actual = TypeColor.getForegroundColor(colors: colors, elementType: .uiComponents, backgroundImage: backgroundImage, conformanceLevel: .AA)
+
+                                    expect(actual).to(equal(Colors.colorWithContrastRatio3))
+                                }
+                            }
                         }
 
                         context("when defining conformance level .AAA") {
@@ -340,6 +356,14 @@ class TypeColorWcagTests: QuickSpec {
                     context("when using a large font") {
                         it("returns a color of conformance level 3") {
                             let actual = TypeColor.getBackgroundColor(colors: colors!, foregroundColor: Colors.white, elementType: .largeFont, conformanceLevel: .AA)
+
+                            expect(actual).to(equal(Colors.colorWithContrastRatio3))
+                        }
+                    }
+                    
+                    context("when using an UI component") {
+                        it("returns a color of conformance level 3") {
+                            let actual = TypeColor.getBackgroundColor(colors: colors!, foregroundColor: Colors.white, elementType: .uiComponents, conformanceLevel: .AA)
 
                             expect(actual).to(equal(Colors.colorWithContrastRatio3))
                         }

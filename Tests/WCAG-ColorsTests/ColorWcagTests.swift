@@ -126,7 +126,7 @@ class ColorWcagTests: QuickSpec {
                             }
                         }
                         
-                        context("when using a small bold font") {
+                        context("when using a large font") {
                             it("returns black") {
                                 let actual = Color.getForegroundColor(colors: colors!, elementType: .largeFont, backgroundColor: SwiftUIColors.white, conformanceLevel: .AA)
                                 
@@ -134,9 +134,9 @@ class ColorWcagTests: QuickSpec {
                             }
                         }
                         
-                        context("when using a large font") {
+                        context("when using an UI component") {
                             it("returns black") {
-                                let actual = Color.getForegroundColor(colors: colors!, elementType: .largeFont, backgroundColor: SwiftUIColors.white, conformanceLevel: .AA)
+                                let actual = Color.getForegroundColor(colors: colors!, elementType: .uiComponents, backgroundColor: SwiftUIColors.white, conformanceLevel: .AA)
                                 
                                 expect(actual).to(equal(SwiftUIColors.colorWithContrastRatio3))
                             }
@@ -220,6 +220,14 @@ class ColorWcagTests: QuickSpec {
                     context("when using a large font") {
                         it("returns a color of conformance level 3") {
                             let actual = Color.getBackgroundColor(colors: colors, foregroundColor: SwiftUIColors.white, elementType: .largeFont, conformanceLevel: .AA)
+
+                            expect(actual).to(equal(SwiftUIColors.colorWithContrastRatio3))
+                        }
+                    }
+                    
+                    context("when using an UI component") {
+                        it("returns black") {
+                            let actual = Color.getBackgroundColor(colors: colors, foregroundColor: SwiftUIColors.white, elementType: .uiComponents, conformanceLevel: .AA)
 
                             expect(actual).to(equal(SwiftUIColors.colorWithContrastRatio3))
                         }
