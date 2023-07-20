@@ -102,19 +102,19 @@ class TypeColorWcagTests: QuickSpec {
             context("when calling getContrastRatio") {
                 context("by passing in the same color twice") {
                     it("returns the minimum contrast ratio of 1.0") {
-                        expect(TypeColor.getContrastRatio(textColor: Colors.white, backgroundColor: Colors.white)).to(equal(1.0))
+                        expect(TypeColor.getContrastRatio(foregroundColor: Colors.white, backgroundColor: Colors.white)).to(equal(1.0))
                     }
                 }
 
                 context("by passing in white and black") {
                     it("returns the maximum contrast ratio of 21.0") {
-                        expect(TypeColor.getContrastRatio(textColor: Colors.white, backgroundColor: Colors.black)).to(equal(21.0))
+                        expect(TypeColor.getContrastRatio(foregroundColor: Colors.white, backgroundColor: Colors.black)).to(equal(21.0))
                     }
                 }
 
                 context("by passing in green and orange color") {
                     it("returns a contrast ratio of 2.31") {
-                        let actualContrastRatio = TypeColor.getContrastRatio(textColor: Colors.colorWithContrastRatio3, backgroundColor: Colors.colorWithContrastRatio7)!
+                        let actualContrastRatio = TypeColor.getContrastRatio(foregroundColor: Colors.colorWithContrastRatio3, backgroundColor: Colors.colorWithContrastRatio7)!
                         let rounded = floor(actualContrastRatio * 100) / 100
 
                         expect(rounded).to(equal(2.3))
@@ -123,7 +123,7 @@ class TypeColorWcagTests: QuickSpec {
 
                 context("by passing in semi transparent color and white") {
                     it("returns a contrast ratio of 4.51") {
-                        let actualContrastRatio = TypeColor.getContrastRatio(textColor: Colors.semiTransparentColor, backgroundColor: Colors.white)!
+                        let actualContrastRatio = TypeColor.getContrastRatio(foregroundColor: Colors.semiTransparentColor, backgroundColor: Colors.white)!
                         let rounded = floor(actualContrastRatio * 100) / 100
 
                         expect(rounded).to(equal(4.51))
@@ -131,10 +131,10 @@ class TypeColorWcagTests: QuickSpec {
                 }
             }
 
-            context("when calling getTextColor") {
+            context("when calling getForegroundColor") {
                 context("by passing in a dark background color") {
                     it("returns white") {
-                        let actual = TypeColor.getTextColor(backgroundColor: Colors.black)
+                        let actual = TypeColor.getForegroundColor(backgroundColor: Colors.black)
 
                         expect(actual).to(equal(TypeColor.white))
                     }
@@ -142,7 +142,7 @@ class TypeColorWcagTests: QuickSpec {
 
                 context("by passing in a light background color") {
                     it("returns black") {
-                        let actual = TypeColor.getTextColor(backgroundColor: Colors.white)
+                        let actual = TypeColor.getForegroundColor(backgroundColor: Colors.white)
 
                         expect(actual).to(equal(TypeColor.black))
                     }
@@ -150,7 +150,7 @@ class TypeColorWcagTests: QuickSpec {
 
                 context("by passing in a background color with a medium relative luminance") {
                     it("returns black") {
-                        let actual = TypeColor.getTextColor(backgroundColor: Colors.colorWithContrastRatio4_5)
+                        let actual = TypeColor.getForegroundColor(backgroundColor: Colors.colorWithContrastRatio4_5)
 
                         expect(actual).to(equal(TypeColor.black))
                     }
@@ -169,7 +169,7 @@ class TypeColorWcagTests: QuickSpec {
 
                     context("by not providing any passing color") {
                         it("returns nil") {
-                            let actual = TypeColor.getTextColor(colors: [], elementType: .smallFont, backgroundColor: Colors.white, conformanceLevel: .AA)
+                            let actual = TypeColor.getForegroundColor(colors: [], elementType: .smallFont, backgroundColor: Colors.white, conformanceLevel: .AA)
 
                             expect(actual).to(beNil())
                         }
@@ -178,7 +178,7 @@ class TypeColorWcagTests: QuickSpec {
                     context("when defining conformance level .AA") {
                         context("when using a small font") {
                             it("returns black") {
-                                let actual = TypeColor.getTextColor(colors: colors!, elementType: .smallFont, backgroundColor: Colors.white, conformanceLevel: .AA)
+                                let actual = TypeColor.getForegroundColor(colors: colors!, elementType: .smallFont, backgroundColor: Colors.white, conformanceLevel: .AA)
 
                                 expect(actual).to(equal(Colors.colorWithContrastRatio4_5))
                             }
@@ -186,7 +186,7 @@ class TypeColorWcagTests: QuickSpec {
 
                         context("when using a large font") {
                             it("returns black") {
-                                let actual = TypeColor.getTextColor(colors: colors!, elementType: .largeFont, backgroundColor: Colors.white, conformanceLevel: .AA)
+                                let actual = TypeColor.getForegroundColor(colors: colors!, elementType: .largeFont, backgroundColor: Colors.white, conformanceLevel: .AA)
 
                                 expect(actual).to(equal(Colors.colorWithContrastRatio3))
                             }
@@ -196,7 +196,7 @@ class TypeColorWcagTests: QuickSpec {
                     context("when defining conformance level .AAA") {
                         context("when using a small font") {
                             it("returns black") {
-                                let actual = TypeColor.getTextColor(colors: colors!, elementType: .smallFont, backgroundColor: Colors.white, conformanceLevel: .AAA)
+                                let actual = TypeColor.getForegroundColor(colors: colors!, elementType: .smallFont, backgroundColor: Colors.white, conformanceLevel: .AAA)
 
                                 expect(actual).to(equal(Colors.colorWithContrastRatio7))
                             }
@@ -204,7 +204,7 @@ class TypeColorWcagTests: QuickSpec {
 
                         context("when using a large font") {
                             it("returns black") {
-                                let actual = TypeColor.getTextColor(colors: colors!, elementType: .largeFont, backgroundColor: Colors.white, conformanceLevel: .AAA)
+                                let actual = TypeColor.getForegroundColor(colors: colors!, elementType: .largeFont, backgroundColor: Colors.white, conformanceLevel: .AAA)
 
                                 expect(actual).to(equal(Colors.colorWithContrastRatio4_5))
                             }
@@ -217,7 +217,7 @@ class TypeColorWcagTests: QuickSpec {
                     context("by passing in a dark background image") {
                         it("returns white") {
                             let backgroundImage = TypeImage.mock(withColor: Colors.black)
-                            let actual = TypeColor.getTextColor(backgroundImage: backgroundImage)
+                            let actual = TypeColor.getForegroundColor(backgroundImage: backgroundImage)
 
                             expect(actual).to(equal(TypeColor.white))
                         }
@@ -226,7 +226,7 @@ class TypeColorWcagTests: QuickSpec {
                     context("by passing in a light background image") {
                         it("returns black") {
                             let backgroundImage = TypeImage.mock(withColor: Colors.white)
-                            let actual = TypeColor.getTextColor(backgroundImage: backgroundImage)
+                            let actual = TypeColor.getForegroundColor(backgroundImage: backgroundImage)
 
                             expect(actual).to(equal(TypeColor.black))
                         }
@@ -235,7 +235,7 @@ class TypeColorWcagTests: QuickSpec {
                     context("by passing in a background image with a medium relative luminance") {
                         it("returns black") {
                             let backgroundImage = TypeImage.mock(withColor: Colors.colorWithContrastRatio4_5)
-                            let actual = TypeColor.getTextColor(backgroundImage: backgroundImage)
+                            let actual = TypeColor.getForegroundColor(backgroundImage: backgroundImage)
 
                             expect(actual).to(equal(TypeColor.black))
                         }
@@ -256,7 +256,7 @@ class TypeColorWcagTests: QuickSpec {
 
                         context("by not providing any passing color") {
                             it("returns nil") {
-                                let actual = TypeColor.getTextColor(colors: [], elementType: .smallFont, backgroundImage: backgroundImage, conformanceLevel: .AA)
+                                let actual = TypeColor.getForegroundColor(colors: [], elementType: .smallFont, backgroundImage: backgroundImage, conformanceLevel: .AA)
 
                                 expect(actual).to(beNil())
                             }
@@ -265,7 +265,7 @@ class TypeColorWcagTests: QuickSpec {
                         context("when defining conformance level .AA") {
                             context("when using a small font") {
                                 it("returns a color of conformance level 4.5") {
-                                    let actual = TypeColor.getTextColor(colors: colors, elementType: .smallFont, backgroundImage: backgroundImage, conformanceLevel: .AA)
+                                    let actual = TypeColor.getForegroundColor(colors: colors, elementType: .smallFont, backgroundImage: backgroundImage, conformanceLevel: .AA)
 
                                     expect(actual).to(equal(Colors.colorWithContrastRatio4_5))
                                 }
@@ -273,7 +273,7 @@ class TypeColorWcagTests: QuickSpec {
 
                             context("when using a large font") {
                                 it("returns a color of conformance level 3") {
-                                    let actual = TypeColor.getTextColor(colors: colors, elementType: .largeFont, backgroundImage: backgroundImage, conformanceLevel: .AA)
+                                    let actual = TypeColor.getForegroundColor(colors: colors, elementType: .largeFont, backgroundImage: backgroundImage, conformanceLevel: .AA)
 
                                     expect(actual).to(equal(Colors.colorWithContrastRatio3))
                                 }
@@ -283,7 +283,7 @@ class TypeColorWcagTests: QuickSpec {
                         context("when defining conformance level .AAA") {
                             context("when using a small font") {
                                 it("returns a color of conformance level 7") {
-                                    let actual = TypeColor.getTextColor(colors: colors, elementType: .smallFont, backgroundImage: backgroundImage, conformanceLevel: .AAA)
+                                    let actual = TypeColor.getForegroundColor(colors: colors, elementType: .smallFont, backgroundImage: backgroundImage, conformanceLevel: .AAA)
 
                                     expect(actual).to(equal(Colors.colorWithContrastRatio7))
                                 }
@@ -291,7 +291,7 @@ class TypeColorWcagTests: QuickSpec {
 
                             context("when using a large font") {
                                 it("returns a color of conformance level 4.5") {
-                                    let actual = TypeColor.getTextColor(colors: colors, elementType: .largeFont, backgroundImage: backgroundImage, conformanceLevel: .AAA)
+                                    let actual = TypeColor.getForegroundColor(colors: colors, elementType: .largeFont, backgroundImage: backgroundImage, conformanceLevel: .AAA)
 
                                     expect(actual).to(equal(Colors.colorWithContrastRatio4_5))
                                 }
@@ -305,7 +305,7 @@ class TypeColorWcagTests: QuickSpec {
             context("when calling getBackgroundColor") {
                 context("by passing in a dark text color") {
                     it("returns white") {
-                        let actual = TypeColor.getBackgroundColor(textColor: Colors.black)
+                        let actual = TypeColor.getBackgroundColor(foregroundColor: Colors.black)
 
                         expect(actual).to(equal(TypeColor.white))
                     }
@@ -313,7 +313,7 @@ class TypeColorWcagTests: QuickSpec {
 
                 context("by passing in a light text color") {
                     it("returns black") {
-                        let actual = TypeColor.getBackgroundColor(textColor: Colors.white)
+                        let actual = TypeColor.getBackgroundColor(foregroundColor: Colors.white)
 
                         expect(actual).to(equal(TypeColor.black))
                     }
@@ -321,7 +321,7 @@ class TypeColorWcagTests: QuickSpec {
 
                 context("by passing in a text color with a medium relative luminance") {
                     it("returns black") {
-                        let actual = TypeColor.getBackgroundColor(textColor: Colors.colorWithContrastRatio4_5)
+                        let actual = TypeColor.getBackgroundColor(foregroundColor: Colors.colorWithContrastRatio4_5)
 
                         expect(actual).to(equal(TypeColor.black))
                     }
@@ -341,7 +341,7 @@ class TypeColorWcagTests: QuickSpec {
 
                 context("by not providing any passing color") {
                     it("returns nil") {
-                        let actual = TypeColor.getBackgroundColor(colors: [], textColor: Colors.white, elementType: .smallFont, conformanceLevel: .AA)
+                        let actual = TypeColor.getBackgroundColor(colors: [], foregroundColor: Colors.white, elementType: .smallFont, conformanceLevel: .AA)
 
                         expect(actual).to(beNil())
                     }
@@ -350,7 +350,7 @@ class TypeColorWcagTests: QuickSpec {
                 context("when defining conformance level .AA") {
                     context("when using a small font") {
                         it("returns a color of conformance level 4.5") {
-                            let actual = TypeColor.getBackgroundColor(colors: colors!, textColor: Colors.white, elementType: .smallFont, conformanceLevel: .AA)
+                            let actual = TypeColor.getBackgroundColor(colors: colors!, foregroundColor: Colors.white, elementType: .smallFont, conformanceLevel: .AA)
 
                             expect(actual).to(equal(Colors.colorWithContrastRatio4_5))
                         }
@@ -358,7 +358,7 @@ class TypeColorWcagTests: QuickSpec {
 
                     context("when using a large font") {
                         it("returns a color of conformance level 3") {
-                            let actual = TypeColor.getBackgroundColor(colors: colors!, textColor: Colors.white, elementType: .largeFont, conformanceLevel: .AA)
+                            let actual = TypeColor.getBackgroundColor(colors: colors!, foregroundColor: Colors.white, elementType: .largeFont, conformanceLevel: .AA)
 
                             expect(actual).to(equal(Colors.colorWithContrastRatio3))
                         }
@@ -368,7 +368,7 @@ class TypeColorWcagTests: QuickSpec {
                 context("when defining conformance level .AAA") {
                     context("when using a small font") {
                         it("returns a color of conformance level 7") {
-                            let actual = TypeColor.getBackgroundColor(colors: colors!, textColor: Colors.white, elementType: .smallFont, conformanceLevel: .AAA)
+                            let actual = TypeColor.getBackgroundColor(colors: colors!, foregroundColor: Colors.white, elementType: .smallFont, conformanceLevel: .AAA)
 
                             expect(actual).to(equal(Colors.colorWithContrastRatio7))
                         }
@@ -376,7 +376,7 @@ class TypeColorWcagTests: QuickSpec {
 
                     context("when using a large font") {
                         it("returns a color of conformance level 4.5") {
-                            let actual = TypeColor.getBackgroundColor(colors: colors!, textColor: Colors.white, elementType: .largeFont, conformanceLevel: .AAA)
+                            let actual = TypeColor.getBackgroundColor(colors: colors!, foregroundColor: Colors.white, elementType: .largeFont, conformanceLevel: .AAA)
 
                             expect(actual).to(equal(Colors.colorWithContrastRatio4_5))
                         }

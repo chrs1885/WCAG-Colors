@@ -32,7 +32,7 @@ public extension TypeColor {
      Calculates the color ratio for a text color on a background color.
 
      - Parameters:
-         - textColor: The text color.
+         - foregroundColor: The text color.
          - backgroundColor: The background color.
 
      - Returns: The contrast ratio for a given pair of colors.
@@ -41,12 +41,12 @@ public extension TypeColor {
 
      - Warning: This function will also return `nil` if any input color is not convertable to the sRGB color space.
      */
-    class func getContrastRatio(textColor: TypeColor, backgroundColor: TypeColor) -> CGFloat? {
-        guard let rgbaTextColor = textColor.rgbaColor, let rgbaBackgroundColor = backgroundColor.rgbaColor else {
+    class func getContrastRatio(foregroundColor: TypeColor, backgroundColor: TypeColor) -> CGFloat? {
+        guard let rgbaForegroundColor = foregroundColor.rgbaColor, let rgbaBackgroundColor = backgroundColor.rgbaColor else {
             return nil
         }
 
-        return RGBAColor.getContrastRatio(textColor: rgbaTextColor, backgroundColor: rgbaBackgroundColor)
+        return RGBAColor.getContrastRatio(foregroundColor: rgbaForegroundColor, backgroundColor: rgbaBackgroundColor)
     }
 
     /**
@@ -61,11 +61,11 @@ public extension TypeColor {
 
      - Warning: This function will also return `nil` if any input color is not convertable to the sRGB color space.
      */
-    class func getTextColor(backgroundColor: TypeColor) -> TypeColor? {
+    class func getForegroundColor(backgroundColor: TypeColor) -> TypeColor? {
         guard let rgbaBackgroundColor = backgroundColor.rgbaColor else { return nil }
-        let textColor = RGBAColor.getTextColor(backgroundColor: rgbaBackgroundColor)
+        let foregroundColor = RGBAColor.getForegroundColor(backgroundColor: rgbaBackgroundColor)
 
-        return textColor == RGBAColor.Colors.black ? .black : .white
+        return foregroundColor == RGBAColor.Colors.black ? .black : .white
     }
 
     /**
@@ -83,15 +83,15 @@ public extension TypeColor {
 
      - Warning: This function will also return `nil` if any input color is not convertable to the sRGB color space.
      */
-    class func getTextColor(colors: [TypeColor], elementType: ElementType, backgroundColor: TypeColor, conformanceLevel: ConformanceLevel = .AA) -> TypeColor? {
+    class func getForegroundColor(colors: [TypeColor], elementType: ElementType, backgroundColor: TypeColor, conformanceLevel: ConformanceLevel = .AA) -> TypeColor? {
         guard let rgbaBackgroundColor = backgroundColor.rgbaColor else { return nil }
 
-        for textColor in colors {
-            guard let rgbaTextColor = textColor.rgbaColor else { return nil }
+        for foregroundColor in colors {
+            guard let rgbaForegroundColor = foregroundColor.rgbaColor else { return nil }
 
-            let isValidTextColor = RGBAColor.isValidColorCombination(textColor: rgbaTextColor, elementType: elementType, backgroundColor: rgbaBackgroundColor, conformanceLevel: conformanceLevel)
-            if isValidTextColor {
-                return textColor
+            let isValidForegroundColor = RGBAColor.isValidColorCombination(foregroundColor: rgbaForegroundColor, elementType: elementType, backgroundColor: rgbaBackgroundColor, conformanceLevel: conformanceLevel)
+            if isValidForegroundColor {
+                return foregroundColor
             }
         }
 
@@ -113,10 +113,10 @@ public extension TypeColor {
 
          - Warning: This function will also return `nil` if the image is corrupted.
          */
-        class func getTextColor(backgroundImage image: TypeImage, imageArea: ImageArea = .full) -> TypeColor? {
+        class func getForegroundColor(backgroundImage image: TypeImage, imageArea: ImageArea = .full) -> TypeColor? {
             guard let averageImageColor = image.averageColor(imageArea: imageArea) else { return nil }
 
-            return TypeColor.getTextColor(backgroundColor: averageImageColor)
+            return TypeColor.getForegroundColor(backgroundColor: averageImageColor)
         }
 
         /**
@@ -135,10 +135,10 @@ public extension TypeColor {
 
          - Warning: This function will also return `nil` if any input color is not convertable to the sRGB color space.
          */
-        class func getTextColor(colors: [TypeColor], elementType: ElementType, backgroundImage: TypeImage, imageArea: ImageArea = .full, conformanceLevel: ConformanceLevel = .AA) -> TypeColor? {
+        class func getForegroundColor(colors: [TypeColor], elementType: ElementType, backgroundImage: TypeImage, imageArea: ImageArea = .full, conformanceLevel: ConformanceLevel = .AA) -> TypeColor? {
             guard let averageImageColor = backgroundImage.averageColor(imageArea: imageArea) else { return nil }
 
-            return TypeColor.getTextColor(colors: colors, elementType: elementType, backgroundColor: averageImageColor, conformanceLevel: conformanceLevel)
+            return TypeColor.getForegroundColor(colors: colors, elementType: elementType, backgroundColor: averageImageColor, conformanceLevel: conformanceLevel)
         }
 
     #endif
@@ -147,7 +147,7 @@ public extension TypeColor {
      Returns the background color with the highest contrast (black or white) for a given text color.
 
      - Parameters:
-        - textColor: The textColor color.
+        - foregroundColor: The foregroundColor color.
 
      - Returns: A color that has the highest contrast with the given text color.
 
@@ -155,9 +155,9 @@ public extension TypeColor {
 
      - Warning: This function will also return `nil` if any input color is not convertable to the sRGB color space.
      */
-    class func getBackgroundColor(textColor: TypeColor) -> TypeColor? {
-        guard let rgbaTextColor = textColor.rgbaColor else { return nil }
-        let backgroundColor = RGBAColor.getBackgroundColor(textColor: rgbaTextColor)
+    class func getBackgroundColor(foregroundColor: TypeColor) -> TypeColor? {
+        guard let rgbaForegroundColor = foregroundColor.rgbaColor else { return nil }
+        let backgroundColor = RGBAColor.getBackgroundColor(foregroundColor: rgbaForegroundColor)
 
         return backgroundColor == RGBAColor.Colors.black ? .black : .white
     }
@@ -167,7 +167,7 @@ public extension TypeColor {
 
      - Parameters:
          - colors: A list of possible background colors.
-         - textColor: The text color that should be used.
+         - foregroundColor: The text color that should be used.
          - elementType: The application of the color pair.
          - conformanceLevel: The conformance level that needs to be passed when calculating the contrast ratio. The default conformance level is .AA.
 
@@ -177,13 +177,13 @@ public extension TypeColor {
 
      - Warning: This function will also return `nil` if any input color is not convertable to the sRGB color space.
      */
-    class func getBackgroundColor(colors: [TypeColor], textColor: TypeColor, elementType: ElementType, conformanceLevel: ConformanceLevel = .AA) -> TypeColor? {
-        guard let rgbaTextColor = textColor.rgbaColor else { return nil }
+    class func getBackgroundColor(colors: [TypeColor], foregroundColor: TypeColor, elementType: ElementType, conformanceLevel: ConformanceLevel = .AA) -> TypeColor? {
+        guard let rgbaForegroundColor = foregroundColor.rgbaColor else { return nil }
 
         for backgroundColor in colors {
             guard let rgbaBackgroundColor = backgroundColor.rgbaColor else { return nil }
 
-            let isValidBackgroundColor = RGBAColor.isValidColorCombination(textColor: rgbaTextColor, elementType: elementType, backgroundColor: rgbaBackgroundColor, conformanceLevel: conformanceLevel)
+            let isValidBackgroundColor = RGBAColor.isValidColorCombination(foregroundColor: rgbaForegroundColor, elementType: elementType, backgroundColor: rgbaBackgroundColor, conformanceLevel: conformanceLevel)
             if isValidBackgroundColor {
                 return backgroundColor
             }

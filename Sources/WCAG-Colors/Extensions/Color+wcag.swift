@@ -13,7 +13,7 @@ public extension Color {
      Calculates the color ratio for a text color on a background color.
 
      - Parameters:
-         - textColor: The text color.
+         - foregroundColor: The text color.
          - backgroundColor: The background color.
 
      - Returns: The contrast ratio for a given pair of colors.
@@ -22,8 +22,8 @@ public extension Color {
 
      - Warning: This function will also return `nil` if any input color is not convertable to the sRGB color space.
      */
-    static func getContrastRatio(textColor: Color, backgroundColor: Color) -> CGFloat? {
-        return RGBAColor.getContrastRatio(textColor: textColor.rgbaColor, backgroundColor: backgroundColor.rgbaColor)
+    static func getContrastRatio(foregroundColor: Color, backgroundColor: Color) -> CGFloat? {
+        return RGBAColor.getContrastRatio(foregroundColor: foregroundColor.rgbaColor, backgroundColor: backgroundColor.rgbaColor)
     }
 
     /**
@@ -38,10 +38,10 @@ public extension Color {
 
      - Warning: This function will also return `nil` if any input color is not convertable to the sRGB color space.
      */
-    static func getTextColor(backgroundColor: Color) -> Color {
-        let textColor = RGBAColor.getTextColor(backgroundColor: backgroundColor.rgbaColor)
+    static func getForegroundColor(backgroundColor: Color) -> Color {
+        let foregroundColor = RGBAColor.getForegroundColor(backgroundColor: backgroundColor.rgbaColor)
 
-        return textColor == RGBAColor.Colors.black ? .black : .white
+        return foregroundColor == RGBAColor.Colors.black ? .black : .white
     }
 
     /**
@@ -57,13 +57,13 @@ public extension Color {
 
      - Note: Semi-transparent text colors will be blended with the background color. However, for background colors, the alpha component is ignored.
      */
-    static func getTextColor(colors: [Color], elementType: ElementType, backgroundColor: Color, conformanceLevel: ConformanceLevel = .AA) -> Color? {
+    static func getForegroundColor(colors: [Color], elementType: ElementType, backgroundColor: Color, conformanceLevel: ConformanceLevel = .AA) -> Color? {
 
-        for textColor in colors {
-            let isValidTextColor = RGBAColor.isValidColorCombination(textColor: textColor.rgbaColor, elementType: elementType, backgroundColor: backgroundColor.rgbaColor, conformanceLevel: conformanceLevel)
+        for foregroundColor in colors {
+            let isValidForegroundColor = RGBAColor.isValidColorCombination(foregroundColor: foregroundColor.rgbaColor, elementType: elementType, backgroundColor: backgroundColor.rgbaColor, conformanceLevel: conformanceLevel)
             
-            if isValidTextColor {
-                return textColor
+            if isValidForegroundColor {
+                return foregroundColor
             }
         }
 
@@ -74,14 +74,14 @@ public extension Color {
      Returns the background color with the highest contrast (black or white) for a given text color.
 
      - Parameters:
-        - textColor: The textColor color.
+        - foregroundColor: The foregroundColor color.
 
      - Returns: A color that has the highest contrast with the given text color.
 
      - Note: Semi-transparent text colors will be blended with the background color. However, for background colors, the alpha component is ignored.
      */
-    static func getBackgroundColor(textColor: Color) -> Color {
-        let backgroundColor = RGBAColor.getBackgroundColor(textColor: textColor.rgbaColor)
+    static func getBackgroundColor(foregroundColor: Color) -> Color {
+        let backgroundColor = RGBAColor.getBackgroundColor(foregroundColor: foregroundColor.rgbaColor)
 
         return backgroundColor == RGBAColor.Colors.black ? .black : .white
     }
@@ -91,7 +91,7 @@ public extension Color {
 
      - Parameters:
          - colors: A list of possible background colors.
-         - textColor: The text color that should be used.
+         - foregroundColor: The text color that should be used.
          - elementType: The application of the color pair.
          - conformanceLevel: The conformance level that needs to be passed when calculating the contrast ratio. The default conformance level is .AA.
 
@@ -101,10 +101,10 @@ public extension Color {
 
      - Warning: This function will also return `nil` if any input color is not convertable to the sRGB color space.
      */
-    static func getBackgroundColor(colors: [Color], textColor: Color, elementType: ElementType, conformanceLevel: ConformanceLevel = .AA) -> Color? {
+    static func getBackgroundColor(colors: [Color], foregroundColor: Color, elementType: ElementType, conformanceLevel: ConformanceLevel = .AA) -> Color? {
 
         for backgroundColor in colors {
-            let isValidBackgroundColor = RGBAColor.isValidColorCombination(textColor: textColor.rgbaColor, elementType: elementType, backgroundColor: backgroundColor.rgbaColor, conformanceLevel: conformanceLevel)
+            let isValidBackgroundColor = RGBAColor.isValidColorCombination(foregroundColor: foregroundColor.rgbaColor, elementType: elementType, backgroundColor: backgroundColor.rgbaColor, conformanceLevel: conformanceLevel)
             
             if isValidBackgroundColor {
                 return backgroundColor
