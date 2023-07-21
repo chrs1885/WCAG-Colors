@@ -10,7 +10,7 @@ import Nimble
 import Quick
 
 class ImageAverageColorTests: QuickSpec {
-    override func spec() {
+    override static func spec() {
         describe("The UIImage/NSImage class") {
             var sut: TypeImage!
 

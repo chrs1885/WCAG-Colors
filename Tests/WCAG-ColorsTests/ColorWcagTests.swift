@@ -21,7 +21,7 @@ import Quick
 
 @available(iOS 17, tvOS 17, watchOS 10, macOS 14, *)
 class ColorWcagTests: QuickSpec {
-    override func spec() {
+    override static func spec() {
         describe("The Color class") {
             context("when calling rgbaColor") {
                 context("when color space is sRGB") {

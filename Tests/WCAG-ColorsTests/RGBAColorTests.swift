@@ -9,7 +9,7 @@ import Nimble
 import Quick
 
 class RGBAColorTests: QuickSpec {
-    override func spec() {
+    override static func spec() {
         struct Colors {
             static let white = RGBAColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 1.0)
             static let semiTransparentColor = RGBAColor(red: 0.5 * 255.0, green: 0.0, blue: 255.0, alpha: 0.75)

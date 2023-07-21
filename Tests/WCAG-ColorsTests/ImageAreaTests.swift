@@ -10,7 +10,7 @@ import Nimble
 import Quick
 
 class ImageAreaTests: QuickSpec {
-    override func spec() {
+    override static func spec() {
         describe("The ImageArea class") {
             var sut: ImageArea!
             let testImage = TypeImage.mock(withColor: .white, rect: CGRect(x: 0, y: 0, width: 3, height: 3))

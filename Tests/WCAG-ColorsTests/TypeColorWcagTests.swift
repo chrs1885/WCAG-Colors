@@ -38,7 +38,7 @@ import Nimble
 import Quick
 
 class TypeColorWcagTests: QuickSpec {
-    override func spec() {
+    override static func spec() {
         describe("The UIColor/NSColor class") {
             context("when calling rgbaColor") {
                 context("when color space is sRGB") {

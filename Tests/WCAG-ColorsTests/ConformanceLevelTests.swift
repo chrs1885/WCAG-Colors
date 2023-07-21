@@ -9,7 +9,7 @@ import Nimble
 import Quick
 
 class ConformanceLevelTests: QuickSpec {
-    override func spec() {
+    override static func spec() {
         describe("The ConformanceLevel class") {
             var sut: ConformanceLevel?
 
