@@ -11,18 +11,12 @@
     /// Typealias used for colors. It maps to UIColor.
     public typealias TypeColor = UIColor
 
-    /// Typealias used for fonts. It maps to UIFont.
-    public typealias TypeFont = UIFont
-
 #elseif os(OSX)
 
     import AppKit
 
     /// Typealias used for colors. It maps to NSColor.
     public typealias TypeColor = NSColor
-
-    /// Typealias used for fonts. It maps to NSFont.
-    public typealias TypeFont = NSFont
 
 #endif
 
