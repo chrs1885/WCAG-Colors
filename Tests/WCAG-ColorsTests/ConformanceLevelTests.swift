@@ -4,9 +4,9 @@
 //  Copyright (c) 2023 Christoph Wendt
 //
 
-@testable import WCAG_Colors
 import Nimble
 import Quick
+@testable import WCAG_Colors
 
 class ConformanceLevelTests: QuickSpec {
     override static func spec() {

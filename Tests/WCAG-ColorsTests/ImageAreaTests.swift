@@ -4,10 +4,10 @@
 //  Copyright (c) 2023 Christoph Wendt
 //
 
-@testable import WCAG_Colors
 import CoreGraphics
 import Nimble
 import Quick
+@testable import WCAG_Colors
 
 class ImageAreaTests: QuickSpec {
     override static func spec() {

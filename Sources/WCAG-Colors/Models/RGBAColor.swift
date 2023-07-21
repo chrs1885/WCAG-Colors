@@ -42,7 +42,7 @@ extension RGBAColor {
         let backgroundColorLuminance = backgroundColor.relativeLuminance
 
         let colorContrast = (max(foregroundColorLuminance, backgroundColorLuminance) + 0.05) / (min(foregroundColorLuminance, backgroundColorLuminance) + 0.05)
-        
+
         return ceil(colorContrast * 100) / 100.0
     }
 

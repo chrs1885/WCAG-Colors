@@ -58,10 +58,9 @@ public extension Color {
      - Note: Semi-transparent text colors will be blended with the background color. However, for background colors, the alpha component is ignored.
      */
     static func getForegroundColor(colors: [Color], elementType: ElementType, backgroundColor: Color, conformanceLevel: ConformanceLevel = .AA) -> Color? {
-
         for foregroundColor in colors {
             let isValidForegroundColor = RGBAColor.isValidColorCombination(foregroundColor: foregroundColor.rgbaColor, elementType: elementType, backgroundColor: backgroundColor.rgbaColor, conformanceLevel: conformanceLevel)
-            
+
             if isValidForegroundColor {
                 return foregroundColor
             }
@@ -102,10 +101,9 @@ public extension Color {
      - Warning: This function will also return `nil` if any input color is not convertable to the sRGB color space.
      */
     static func getBackgroundColor(colors: [Color], foregroundColor: Color, elementType: ElementType, conformanceLevel: ConformanceLevel = .AA) -> Color? {
-
         for backgroundColor in colors {
             let isValidBackgroundColor = RGBAColor.isValidColorCombination(foregroundColor: foregroundColor.rgbaColor, elementType: elementType, backgroundColor: backgroundColor.rgbaColor, conformanceLevel: conformanceLevel)
-            
+
             if isValidBackgroundColor {
                 return backgroundColor
             }

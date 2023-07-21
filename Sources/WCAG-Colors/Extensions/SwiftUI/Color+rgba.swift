@@ -16,8 +16,8 @@ extension Color {
             if nomralizedValue < 0.0 { return 0.0 }
             return ceil(nomralizedValue * 100) / 100.0
         }
-        
-        let color = self.resolve(in: EnvironmentValues())
+
+        let color = resolve(in: EnvironmentValues())
 
         return RGBAColor(
             red: normalize(color.red),

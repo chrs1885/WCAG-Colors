@@ -4,13 +4,13 @@
 //  Copyright (c) 2023 Christoph Wendt
 //
 
-@testable import WCAG_Colors
 import Nimble
 import Quick
+@testable import WCAG_Colors
 
 class RGBAColorTests: QuickSpec {
     override static func spec() {
-        struct Colors {
+        enum Colors {
             static let white = RGBAColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 1.0)
             static let semiTransparentColor = RGBAColor(red: 0.5 * 255.0, green: 0.0, blue: 255.0, alpha: 0.75)
             static let blendedColor = RGBAColor(red: 0.625 * 255.0, green: 0.25 * 255.0, blue: 255.0, alpha: 1.0)

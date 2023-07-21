@@ -23,7 +23,7 @@ public enum ConformanceLevel: Int {
     case failed = 0
 }
 
-extension ConformanceLevel {
+public extension ConformanceLevel {
     /**
      Initializes a ConformanceLevel based on a given contrast ratio and the application of the color pair.
 
@@ -31,7 +31,7 @@ extension ConformanceLevel {
          - contrastRatio: The contrast ratio of a text and its background.
          - elementType: The application of the color pair.
      */
-    public init(contrastRatio: CGFloat, elementType: ElementType) {
+    init(contrastRatio: CGFloat, elementType: ElementType) {
         self = ConformanceLevel.failed
 
         switch elementType {
@@ -48,7 +48,7 @@ extension ConformanceLevel {
     }
 
     /// The text representation of the conformance level.
-    public var text: String {
+    var text: String {
         switch self {
         case .A:
             return "A"
@@ -61,7 +61,7 @@ extension ConformanceLevel {
         }
     }
 
-    static func >= (lhs: ConformanceLevel, rhs: ConformanceLevel) -> Bool {
+    internal static func >= (lhs: ConformanceLevel, rhs: ConformanceLevel) -> Bool {
         return lhs.rawValue >= rhs.rawValue
     }
 }

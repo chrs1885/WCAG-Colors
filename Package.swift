@@ -31,9 +31,9 @@ let package = Package(
             dependencies: ["WCAG-Colors", "Quick", "Nimble"],
             linkerSettings: [
                 .linkedFramework("AppKit", .when(platforms: [.macOS])),
-                .linkedFramework("UIKit", .when(platforms: [.iOS, .tvOS, .watchOS]))
-                ]
-                
+                .linkedFramework("UIKit", .when(platforms: [.iOS, .tvOS, .watchOS])),
+            ]
+
         ),
     ],
     swiftLanguageVersions: [.v5]

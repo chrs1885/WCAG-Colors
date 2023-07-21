@@ -33,9 +33,9 @@
 
 #endif
 
-@testable import WCAG_Colors
 import Nimble
 import Quick
+@testable import WCAG_Colors
 
 class TypeColorWcagTests: QuickSpec {
     override static func spec() {
@@ -107,7 +107,7 @@ class TypeColorWcagTests: QuickSpec {
 
                 context("by passing in semi transparent color and white") {
                     it("returns a contrast ratio of 4.51") {
-                         expect(TypeColor.getContrastRatio(foregroundColor: Colors.semiTransparentColor, backgroundColor: Colors.white)).to(equal(4.52))
+                        expect(TypeColor.getContrastRatio(foregroundColor: Colors.semiTransparentColor, backgroundColor: Colors.white)).to(equal(4.52))
                     }
                 }
             }
@@ -172,7 +172,7 @@ class TypeColorWcagTests: QuickSpec {
                                 expect(actual).to(equal(Colors.colorWithContrastRatio3))
                             }
                         }
-                        
+
                         context("when using an UI component") {
                             it("returns black") {
                                 let actual = TypeColor.getForegroundColor(colors: colors!, elementType: .uiComponents, backgroundColor: Colors.white, conformanceLevel: .AA)
@@ -267,7 +267,7 @@ class TypeColorWcagTests: QuickSpec {
                                     expect(actual).to(equal(Colors.colorWithContrastRatio3))
                                 }
                             }
-                            
+
                             context("when using an UI component") {
                                 it("returns a color of conformance level 3") {
                                     let actual = TypeColor.getForegroundColor(colors: colors, elementType: .uiComponents, backgroundImage: backgroundImage, conformanceLevel: .AA)
@@ -360,7 +360,7 @@ class TypeColorWcagTests: QuickSpec {
                             expect(actual).to(equal(Colors.colorWithContrastRatio3))
                         }
                     }
-                    
+
                     context("when using an UI component") {
                         it("returns a color of conformance level 3") {
                             let actual = TypeColor.getBackgroundColor(colors: colors!, foregroundColor: Colors.white, elementType: .uiComponents, conformanceLevel: .AA)
