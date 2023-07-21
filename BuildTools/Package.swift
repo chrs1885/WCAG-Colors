@@ -1,14 +1,13 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.7
 import PackageDescription
 
 let package = Package(
     name: "BuildTools",
-    platforms: [.macOS(.v10_11)],
+    platforms: [.macOS(.v11)],
     dependencies: [
-        .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.48.11"),
-        .package(url: "https://github.com/Realm/SwiftLint", from: "0.43.1"),
-        .package(url: "https://github.com/orta/Komondor", from: "1.1.0"),
-        .package(url: "https://github.com/eneko/SourceDocs.git", from: "1.2.1"),
+        .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.51.13"),
+        .package(url: "https://github.com/Realm/SwiftLint", from: "0.52.4"),
+        .package(url: "https://github.com/orta/Komondor", from: "1.1.4"),
     ],
     targets: [.target(name: "BuildTools", path: "")]
 )
@@ -21,7 +20,6 @@ let package = Package(
             "pre-commit": [
                 // "swift run swiftlint ../ --config ../.swiftlint",
                 "swift run swiftformat ../ --config ../.swiftformat",
-                // "swift run sourcedocs generate --input-folder ../ --spm-module WCAG-Colors",
             ],
         ],
     ]).write()
