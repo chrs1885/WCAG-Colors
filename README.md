@@ -5,13 +5,25 @@
 [![Platform](https://img.shields.io/cocoapods/p/WCAG-Colors.svg?style=flat)](https://cocoapods.org/pods/WCAG-Colors)
 [![Twitter](https://img.shields.io/badge/twitter-%40chr__wendt-58a1f2.svg)](https://twitter.com/chr_wendt)
 
-The *Web Content Accessibility Guidelines* (WCAG) define minimum contrast ratios for a text and its background. The WCAG-Colors framework extends `UIColor` and `NSColor` with functionality to use WCAG conformant colors within your apps to help people with visual disabilities to perceive content. 
+## Version 2.0.0 🥳
+
+### Features
+* Supports SwiftUI Color (iOS 17 & macOS 14)
+* Supports contrast calculation for UI components
+
+### Breaking Changes
+* Updated function names and parameter labels
+* FontProps got replaced with `ElementType`
+
+# WCAG-Colors for Swift
+
+The *Web Content Accessibility Guidelines* (WCAG) define minimum contrast ratios for a foreground color and its background. The WCAG-Colors framework extends `Color`, `UIColor`, and `NSColor` with functionality to use WCAG conformant colors within your apps to help people with visual disabilities to perceive content. 
 
 It provides APIs for calculating:
 
-* high contrast text color for a given background color
-* high contrast background color for a given text color
-* high contrast captions colot for a given background image
+* high contrast foreground color for a given background color
+* high contrast background color for a given foreground color
+* high contrast captions color for a given background image
 * WCAG conformance levels
 * contrast ratios
 
@@ -20,7 +32,7 @@ Internally, the provided colors will be mapped to an equivalent of the sRGB colo
 
 ## Documentation
 
-WCAG-Colors offers a whole lot of features along with a bunch of configurations. To find more about how to use them inside the [documentation](Documentation/Reference/README.md) section.
+WCAG-Colors offers a whole lot of features along with a bunch of configurations. To find more about how to use them inside the [documentation](Documentation/) section.
 
 ## Installation
 
@@ -40,7 +52,7 @@ end
 
 ```ruby
 dependencies: [
-    .package(url: "https://github.com/chrs1885/WCAG-Colors.git", from: "1.0.0")
+    .package(url: "https://github.com/chrs1885/WCAG-Colors.git", from: "2.0.0")
 ]
 ```
 
@@ -52,20 +64,20 @@ Simply drop the extension files into your project.
 
 <a id="colors"></a> 
 
-#### Text colors
-Get a high contrast text color for a given background color as follows:
+#### Foreground colors
+Get a high contrast foreground color for a given background color as follows:
 
 ```swift
-let textColor = UIColor.getTextColor(onBackgroundColor: UIColor.red)!
+let foregroundColor = Color.getForegroundColor(backgroundColor: Color.red)!
 ```
 
-This will return the text color with the highest possible contrast (black/white). Alternatively, you can define a list of possible text colors as well as a required conformance level. Since the WCAG requirements for contrast differ in text size and weight, you also need to provide the font used for the text. The following will return the first text color that satisfies the required conformance level (*AA* by default).
+This will return the foreground color with the highest possible contrast (black/white). Alternatively, you can define a list of possible foreground colors as well as a required conformance level. Since the WCAG requirements are different for texts and UI components, you also need to provide the specific application. The following will return the first text color that satisfies the required conformance level (*AA* by default).
 
 ```swift
-let textColor = UIColor.getTextColor(
-    fromColors: [UIColor.red, UIColor.yellow],
-    withFont: myLabel.font,
-    onBackgroundColor: view.backgroundColor,
+let foregroundColor = Color.getForegroundColor(
+    colors: [Color.red, Color.yellow],
+    elementType: .smallFont,
+    backgroundColor: Color.purple,
     conformanceLevel: .AA
 )!
 ```
@@ -75,66 +87,67 @@ let textColor = UIColor.getTextColor(
 This will also work the other way round. If you are looking for a high contrast background color:
 
 ```swift
-let backgroundColor = UIColor.getBackgroundColor(forTextColor: UIColor.red)!
+let backgroundColor = Color.getBackgroundColor(foregroundColor: UIColor.red)!
 
 // or
 
-let backgroundColor = UIColor.getBackgroundColor(
-    fromColors: [UIColor.red, UIColor.yellow],
-    forTextColor: myLabel.textColor,
-    withFont: myLabel.font,
+let backgroundColor = Color.getBackgroundColor(
+    colors: [Color.red, Color.yellow],
+    foregroundColor: Color.purple,
+    elementType: .smallFont,
     conformanceLevel: .AA
 )!
 ```
 
 <a id="captions"></a> 
-#### Image captions (iOS/tvOS/macOS)
+#### Image captions (UIKit/AppKit)
 
-Get a high contrast text color for any given background image as follows:
+Get a high contrast foreground color for any given background image as follows:
 
 ```swift
-let textColor = UIColor.getTextColor(onBackgroundImage: myImage imageArea: .full)!
+let foregroundColor = UIColor.getForegroundColor(backgroundImage: myImage imageArea: .full)!
 ```
 
-This will return the text color with the highest possible contrast (black/white) for a specific image area. 
+This will return the foreground color with the highest possible contrast (black/white) for a specific image area. 
 
-Alternatively, you can define a list of possible text colors as well as a required conformance level. Since the WCAG requirements for contrast differ in text size and weight, you also need to provide the font used for the text. The following will return the first text color that satisfies the required conformance level (*AA* by default).
+Alternatively, you can define a list of possible foreground colors as well as a required conformance level. Since the WCAG requirements are different for texts and UI components, you also need to provide the specific application. The following will return the first foreground color that satisfies the required conformance level (*AA* by default).
 
 ```swift
-let textColor = UIColor.getTextColor(
-    fromColors: [UIColor.red, UIColor.yellow],
-    withFont: myLabel.font,
-    onBackgroundImage: view.backgroundColor,
+let foreground = UIColor.getForegroundColor(
+    colors: [UIColor.red, UIColor.yellow],
+    elementType: .smallFont,
+    backgroundImage: UIColor.purple,
     imageArea: topLeft,
     conformanceLevel: .AA
 )!
 ```
 
-You can find an overview of all image areas available in the [documentation](Documentation/Reference/enums/ImageArea.md).
+You can find an overview of all image areas available in the [documentation](Documentation/).
 
 #### Calculating contrast ratios & WCAG conformance levels
 
 The contrast ratio of two opaque colors can be calculated as well:
 
 ```swift
-let contrastRatio: CGFloat = UIColor.getContrastRatio(forTextColor: UIColor.red, onBackgroundColor: UIColor.yellow)!
+let contrastRatio: CGFloat = UIColor.getContrastRatio(foregroundColor: UIColor.red, backgroundColor: UIColor.yellow)!
 ```
 
 Once the contrast ratio has been determined, you can check the resulting conformance level specified by WCAG as follows:
 
 ```swift
-let passedConformanceLevel = ConformanceLevel(contrastRatio: contrastRatio, fontSize: myLabel.font.pointSize, isBoldFont: true)
+let passedConformanceLevel = ConformanceLevel(contrastRatio: contrastRatio, elementType: .largeFont)
 ```
 
 Here's an overview of available conformance levels:
 
-| Level   | Contrast ratio                 | Font size               |
-| --------|:-------------------------------|:------------------------|
-| .A      | *Not specified for text color* | -                       |
-| .AA     | 3.0                            | 18.0 (or 14.0 and bold) |
-|         | 4.5                            | 14.0                    |
-| .AAA    | 4.5                            | 18.0 (or 14.0 and bold) |
-| .AAA    | 7.0                            | 14.0                    |
+| Level   | Contrast ratio                 | ElementType             | Description             |
+| --------|:-------------------------------|:------------------------|:------------------------|
+| .A      | *Not specified for contrast*   | -                       | -                       |
+| .AA     | 3.0                            | .uiComponent            | UI component            |
+|         | 3.0                            | .largeFont              | 18.0 (or 14.0 and bold) |
+|         | 4.5                            | .smallFont              | 14.0                    |
+| .AAA    | 4.5                            | .largeFont              | 18.0 (or 14.0 and bold) |
+|         | 7.0                            | .smallFont              | 14.0                    |
 | .failed | *.AA/.AAA not satisfied*       | -                       |
 
 ## Author
