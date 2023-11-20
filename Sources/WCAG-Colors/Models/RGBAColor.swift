@@ -60,7 +60,7 @@ extension RGBAColor {
     static func getForegroundColor(backgroundColor: RGBAColor) -> RGBAColor {
         let luminance = backgroundColor.relativeLuminance
 
-        return luminance > 0.179 ? Colors.black : Colors.white
+        return luminance > Globals.luminanceThreshold ? Colors.black : Colors.white
     }
 }
 
@@ -74,7 +74,7 @@ extension RGBAColor {
 
             return whiteContrastRatio > blackContrastRatio ? Colors.white : Colors.black
         } else {
-            return foregroundColor.relativeLuminance > 0.179 ? Colors.black : Colors.white
+            return foregroundColor.relativeLuminance > Globals.luminanceThreshold ? Colors.black : Colors.white
         }
     }
 }
